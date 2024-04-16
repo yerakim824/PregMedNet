@@ -121,7 +121,8 @@ def Interactive_Plot(data):
     node_hover_tool = [('Node','@index'),('Class','@class')]
 
     #Create a plot — set dimensions, toolbar, and title
-    plot = figure(tooltips = node_hover_tool,tools="pan,wheel_zoom,box_zoom,reset", toolbar_location="above",plot_width=1350,plot_height=1200) #x_range=(-2000, 1700), y_range=(-2000, 4000),xwheel_pan, ywheel_pan,, title=title,
+    # plot = figure(tooltips = node_hover_tool,tools="pan,wheel_zoom,box_zoom,reset", toolbar_location="above",plot_width=1350,plot_height=1200) #x_range=(-2000, 1700), y_range=(-2000, 4000),xwheel_pan, ywheel_pan,, title=title,
+    plot = figure(tooltips = node_hover_tool,tools="pan,wheel_zoom,box_zoom,reset", toolbar_location="above",width=1350,height=1200)
     plot.add_tools(HoverTool(tooltips=node_hover_tool), TapTool(), BoxSelectTool())
 
     G=nx.Graph()
