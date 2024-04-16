@@ -13,6 +13,7 @@ from sklearn.manifold import TSNE
 
 import time
 import math
+from pathlib import Path
 
 import bokeh
 from bokeh.io import output_notebook, show, save,output_file
@@ -48,7 +49,8 @@ markers = [plt.Line2D([0,0],[0,0],color=color, marker='o', linestyle='') for col
 
 
 def RAW_ODDS_RATIOS():
-    raw_edge_df = pd.read_csv('2024_reference_tables/raw_edges.csv').drop(columns=['Unnamed: 0'],axis=1)
+    file_path_raw_or = Path(__file__).parents[0] / '2024_reference_tables/raw_edges.csv'
+    raw_edge_df = pd.read_csv(file_path_raw_or).drop(columns=['Unnamed: 0'],axis=1)
     raw_edge_df_modi = raw_edge_df.copy()
     raw_edge_df_modi['color_clicked_modi'] = np.where(raw_edge_df_modi['color']=='#c9c9c9',raw_edge_df_modi['color_clicked'],'#0000ff')
     raw_edge_df_modi['color']='#c9c9c9'
@@ -56,7 +58,8 @@ def RAW_ODDS_RATIOS():
     return raw_edge_df_modi
 
 def ADJ_ODDS_RATIOS():
-    adj_edge_df = pd.read_csv('2024_reference_tables/adj_edges.csv').drop(columns=['Unnamed: 0'],axis=1)
+    file_path_adj_or = Path(__file__).parents[0] / '2024_reference_tables/adj_edges.csv'
+    adj_edge_df = pd.read_csv(file_path_adj_or).drop(columns=['Unnamed: 0'],axis=1)
     adj_edge_df_modi = adj_edge_df.copy()
     adj_edge_df_modi['color_clicked_modi'] = np.where(adj_edge_df_modi['color']=='#c9c9c9',adj_edge_df_modi['color_clicked'],'#0000ff')
     adj_edge_df_modi['color']='#c9c9c9'
@@ -64,7 +67,8 @@ def ADJ_ODDS_RATIOS():
     return adj_edge_df_modi
 
 def Interactive_Plot(data):
-    node_df = pd.read_csv('2024_reference_tables/node_tsne.csv').set_index('node')
+    file_path_nodes = Path(__file__).parents[0] / '2024_reference_tables/node_tsne.csv'
+    node_df = pd.read_csv(file_path_nodes).set_index('node')
     edge_df = data
     
     ## Final Edge Info to edge_list ##
