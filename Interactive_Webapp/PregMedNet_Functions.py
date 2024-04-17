@@ -94,10 +94,10 @@ def Interactive_Plot(data):
     node_size_dict = node_size_df.to_dict(orient='index')
     node_size_final={}
     for key in node_size_dict.keys():
-        if node_size_dict[key]['odds ratio']==1:
-            node_size_dict[key]['odds ratio']=2
-        node_size_final[key] = math.log2(node_size_dict[key]['odds ratio'])*7
-        node_size_final[key] = node_size_dict[key]['odds ratio']
+        if node_size_dict[key]['odds ratio']<=4:
+            node_size_dict[key]['odds ratio']=4
+        node_size_final[key] = math.log2(node_size_dict[key]['odds ratio'])*3
+        # node_size_final[key] = node_size_dict[key]['odds ratio']
 
     ## Final Node Information to node_list##
     node_list = []
@@ -106,7 +106,7 @@ def Interactive_Plot(data):
         try:
             size=node_size_final[key]
         except:
-            size=1
+            size=4
         each_node = (key,{'pos':(node_dict[key]['tsne-origin-one-modi'],node_dict[key]['tsne-origin-two-modi']),
                             'class':node_dict[key]['New_Med_Group'], 'size':size, 'color':node_dict[key]['color']})
         node_list.append(each_node)
