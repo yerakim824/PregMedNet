@@ -92,12 +92,15 @@ def Interactive_Plot(data):
     med_edge_num = edge_df.groupby('Medication').count()[['odds ratio']]
     node_size_df = pd.concat([dz_edge_num,med_edge_num])
     node_size_dict = node_size_df.to_dict(orient='index')
+    dz_list = list(dz_edge_num.index)
     node_size_final={}
     for key in node_size_dict.keys():
         if node_size_dict[key]['odds ratio']<=4:
             node_size_dict[key]['odds ratio']=4
-        node_size_final[key] = math.log2(node_size_dict[key]['odds ratio'])*3
-        # node_size_final[key] = node_size_dict[key]['odds ratio']
+        if key in dz_list:
+            node_size_final[key] = math.log2(node_size_dict[key]['odds ratio'])*5
+        else:
+            node_size_final[key] = math.log2(node_size_dict[key]['odds ratio'])*3
 
     ## Final Node Information to node_list##
     node_list = []

@@ -40,7 +40,7 @@ st.set_page_config(layout='wide')
 
 # split upper columns
 st.header("PregMedNet: Associations between Neonatal Complications and Maternal Medications")
-col1, col2 = st.columns([1, 4])
+col1, col2 = st.columns([1.4, 3.6])
 
 
 
