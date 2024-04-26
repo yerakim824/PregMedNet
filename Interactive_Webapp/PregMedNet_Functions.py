@@ -13,7 +13,6 @@ from sklearn.manifold import TSNE
 
 import time
 import math
-from pathlib import Path
 
 import bokeh
 from bokeh.io import output_notebook, show, save,output_file
@@ -49,8 +48,7 @@ markers = [plt.Line2D([0,0],[0,0],color=color, marker='o', linestyle='') for col
 
 
 def RAW_ODDS_RATIOS():
-    file_path_raw_or = Path(__file__).parents[0] / '2024_reference_tables/raw_edges.csv'
-    raw_edge_df = pd.read_csv(file_path_raw_or).drop(columns=['Unnamed: 0'],axis=1)
+    raw_edge_df = pd.read_csv('2024_reference_tables/raw_edges.csv').drop(columns=['Unnamed: 0'],axis=1)
     raw_edge_df_modi = raw_edge_df.copy()
     raw_edge_df_modi['color_clicked_modi'] = np.where(raw_edge_df_modi['color']=='#c9c9c9',raw_edge_df_modi['color_clicked'],'#0000ff')
     raw_edge_df_modi['color']='#c9c9c9'
@@ -58,17 +56,18 @@ def RAW_ODDS_RATIOS():
     return raw_edge_df_modi
 
 def ADJ_ODDS_RATIOS():
-    file_path_adj_or = Path(__file__).parents[0] / '2024_reference_tables/adj_edges.csv'
-    adj_edge_df = pd.read_csv(file_path_adj_or).drop(columns=['Unnamed: 0'],axis=1)
+    adj_edge_df = pd.read_csv('2024_reference_tables/adj_edges.csv').drop(columns=['Unnamed: 0'],axis=1)
     adj_edge_df_modi = adj_edge_df.copy()
     adj_edge_df_modi['color_clicked_modi'] = np.where(adj_edge_df_modi['color']=='#c9c9c9',adj_edge_df_modi['color_clicked'],'#0000ff')
     adj_edge_df_modi['color']='#c9c9c9'
     adj_edge_df_modi = adj_edge_df_modi.drop(columns=['color_clicked']).rename(columns={'color_clicked_modi':'color_clicked'})
     return adj_edge_df_modi
 
+# def DDI_BOTH():
+#     ddi_both = pd.read_csv()
+
 def Interactive_Plot(data):
-    file_path_nodes = Path(__file__).parents[0] / '2024_reference_tables/node_tsne.csv'
-    node_df = pd.read_csv(file_path_nodes).set_index('node')
+    node_df = pd.read_csv('2024_reference_tables/node_tsne.csv').set_index('node')
     edge_df = data
     
     ## Final Edge Info to edge_list ##
@@ -117,15 +116,14 @@ def Interactive_Plot(data):
     ##### Bokeh Network Graph #####
     #Choose a title!
     output_notebook()
-    #title = 'PregMedNet Network Graph'
+    title = 'PregMedNet Network Graph'
 
     #Establish which categories will appear when hovering over each node
     HOVER_TOOLTIPS = [('Med/Disease', '$index'), ('start', '@start'), ('end', '@end')]
     node_hover_tool = [('Node','@index'),('Class','@class')]
 
     #Create a plot — set dimensions, toolbar, and title
-    # plot = figure(tooltips = node_hover_tool,tools="pan,wheel_zoom,box_zoom,reset", toolbar_location="above",plot_width=1350,plot_height=1200) #x_range=(-2000, 1700), y_range=(-2000, 4000),xwheel_pan, ywheel_pan,, title=title,
-    plot = figure(tooltips = node_hover_tool,tools="pan,wheel_zoom,box_zoom,reset", toolbar_location="above",width=1350,height=1200)
+    plot = figure(tooltips = node_hover_tool,tools="pan,wheel_zoom,box_zoom,reset", toolbar_location="above",plot_width=1000,plot_height=1000) #,plot_width=1350,plot_height=1200
     plot.add_tools(HoverTool(tooltips=node_hover_tool), TapTool(), BoxSelectTool())
 
     G=nx.Graph()
@@ -155,12 +153,9 @@ def Interactive_Plot(data):
     network_graph = from_networkx(G, nx.spring_layout,pos=fixed_positions, fixed = fixed_nodes,scale=10,center=(0,0))
 
     ######## Test #########
-    # network_graph.node_renderer.glyph = Circle(size='node_size', fill_color='node_color')
-    # network_graph.node_renderer.selection_glyph = Circle(size='node_size', fill_color='node_color')
-    # network_graph.node_renderer.hover_glyph = Circle(size='node_size', fill_color='node_color')
-    network_graph.node_renderer.glyph = Circle(radius='node_size', fill_color='node_color')
-    network_graph.node_renderer.selection_glyph = Circle(radius='node_size', fill_color='node_color')
-    network_graph.node_renderer.hover_glyph = Circle(radius='node_size', fill_color='node_color')
+    network_graph.node_renderer.glyph = Circle(size='node_size', fill_color='node_color')
+    network_graph.node_renderer.selection_glyph = Circle(size='node_size', fill_color='node_color')
+    network_graph.node_renderer.hover_glyph = Circle(size='node_size', fill_color='node_color')
 
     network_graph.edge_renderer.data_source.data["line_color"] = [G.get_edge_data(a,b)['color'] for a, b in G.edges()]
     network_graph.edge_renderer.glyph = MultiLine(line_color="edge_color", line_alpha=0.2)
@@ -183,6 +178,125 @@ def Interactive_Plot(data):
     plot.outline_line_color = None
     
     return plot
+
+
+def DDI_Plot(ddi_node,ddi_edge):
+    ### define attributes of the edges ###
+    final_edge_df = ddi_edge[['Med1','Med2','b3','pval(b3)']]
+    final_edge_df['weight']=-np.log10(final_edge_df['pval(b3)'])/3
+    max_weight = np.sort(final_edge_df['weight'].unique())[-2]
+    final_edge_df['weight_modi']=np.where(final_edge_df['weight']==np.inf,max_weight,final_edge_df['weight'])
+    final_edge_df['color']=np.where(final_edge_df['b3']<0,'#0000ff','#FF0000')
+    final_edge_df['color_clicked']=np.where(final_edge_df['b3']<0,'#0000ff','#FF0000')
+    edge_list = []
+    edge_dict = final_edge_df.to_dict(orient='index')
+    edge_dict
+    for key in edge_dict.keys():
+        each_edge=(edge_dict[key]['Med1'],edge_dict[key]['Med2'],
+                    {
+                        # 'weight': edge_dict[key]['weight'],
+                        'weight_modi':edge_dict[key]['weight_modi'],
+                        'color': edge_dict[key]['color'],
+                        'color_clicked': edge_dict[key]['color_clicked'],
+                        'b3':edge_dict[key]['b3'],
+                        'pval(b3)':edge_dict[key]['pval(b3)']
+                    }
+                )
+        edge_list.append(each_edge)
+    
+    ### define attributes of the nodes ###
+    node_df = ddi_node.set_index('node')
+    
+    ## Add node size
+    node_dict = node_df.to_dict(orient='index')
+    med1_count = ddi_edge.groupby('Med1').count()[['Disease']].reset_index().rename(columns={'Med1':'Medication'})
+    med2_count = ddi_edge.groupby('Med2').count()[['Disease']].reset_index().rename(columns={'Med2':'Medication'})
+    node_size_df = pd.concat([med1_count,med2_count]).groupby('Medication').sum().rename(columns={'Disease':'Count'})
+    node_size_dict = node_size_df.to_dict(orient='index')
+    node_size_dict
+    node_size_final={}
+    for key in node_size_dict.keys():
+        if node_size_dict[key]['Count']<1:
+            node_size_dict[key]['Count']=4
+        else:
+            node_size_final[key] = 15 #node_size_dict[key]['Count']*2
+            
+    node_list = []
+    for key in node_dict.keys():
+        try:
+            size=node_size_final[key]
+        except:
+            size=4
+        each_node = (key,{'pos':(node_dict[key]['tsne-origin-one-modi'],node_dict[key]['tsne-origin-two-modi']),
+                            'class':node_dict[key]['New_Med_Group'], 'size':size, 'color':node_dict[key]['color']})
+        node_list.append(each_node)
+        
+    ### bokeh network graph ###
+    output_notebook()
+    title = 'Drug-Drug Interactions Network Graph'
+
+    #Establish which categories will appear when hovering over each node
+    HOVER_TOOLTIPS = [('Med/Disease', '$index'), ('start', '@start'), ('end', '@end')]
+    node_hover_tool = [('Node','@index'),('Class','@class')]
+
+    #Create a plot — set dimensions, toolbar, and title
+    plot = figure(tooltips = node_hover_tool, tools="pan,wheel_zoom,box_zoom,reset", toolbar_location="above",plot_width=1000,plot_height=1000) #title=title, 
+    
+    plot.add_tools(HoverTool(tooltips=node_hover_tool), TapTool(), BoxSelectTool())
+
+    G=nx.Graph()
+    G.add_nodes_from(node_list)
+    G.add_edges_from(edge_list)
+
+
+    fixed_nodes = node_dict.keys()
+    fixed_positions = nx.get_node_attributes(G,'pos')
+    node_sizes = nx.get_node_attributes(G,'size')
+    node_colors = nx.get_node_attributes(G,'color')
+
+    pos = nx.spring_layout(G,pos=fixed_positions)#,pos=fixed_positions, fixed = fixed_nodes
+    edge_width = nx.get_edge_attributes(G,'weight_modi')
+    edge_color = nx.get_edge_attributes(G,'color')
+    edge_color_click=nx.get_edge_attributes(G,'color_clicked')
+
+
+    nx.set_node_attributes(G, node_colors, 'node_color')
+    nx.set_node_attributes(G, node_sizes, 'node_size')
+    nx.set_edge_attributes(G, edge_color, "edge_color")
+    nx.set_edge_attributes(G, edge_color_click, "edge_color_click")
+
+    ddi_graph = from_networkx(G, nx.spring_layout,pos=fixed_positions, fixed = fixed_nodes,scale=10,center=(0,0))
+
+    ######## Test #########
+    ddi_graph.node_renderer.glyph = Circle(size='node_size', fill_color='node_color')
+    ddi_graph.node_renderer.selection_glyph = Circle(size='node_size', fill_color='node_color')
+    ddi_graph.node_renderer.hover_glyph = Circle(size='node_size', fill_color='node_color')
+
+    ddi_graph.edge_renderer.data_source.data["line_color"] = [G.get_edge_data(a,b)['color'] for a, b in G.edges()]
+    ddi_graph.edge_renderer.glyph = MultiLine(line_color="edge_color", line_alpha=0.2)
+    ddi_graph.edge_renderer.selection_glyph = MultiLine(line_color= "edge_color_click",  line_alpha=1)
+    ddi_graph.edge_renderer.hover_glyph = MultiLine(line_color="edge_color_click", line_alpha=1)
+    ddi_graph.edge_renderer.data_source.data["line_width"] = [G.get_edge_data(a,b)['weight_modi'] for a, b in G.edges()]
+    ddi_graph.edge_renderer.glyph.line_width = {'field': 'line_width'}
+    ddi_graph.edge_renderer.selection_glyph.line_width = {'field': 'line_width'}
+    ddi_graph.edge_renderer.hover_glyph.line_width = {'field': 'line_width'}
+
+    ddi_graph.selection_policy = NodesAndLinkedEdges()
+
+    #Add network graph to the plot
+    plot.renderers.append(ddi_graph)
+
+
+    plot.xgrid.visible = False
+    plot.ygrid.visible = False
+    plot.axis.visible = False
+    plot.outline_line_color = None
+    
+    return plot
+
+
+    
+    
 
 
 
