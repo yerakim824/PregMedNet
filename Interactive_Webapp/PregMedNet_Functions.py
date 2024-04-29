@@ -60,8 +60,8 @@ def RAW_ODDS_RATIOS():
     return raw_edge_df_modi
 
 def ADJ_ODDS_RATIOS():
-    file_path_raw_or = Path(__file__).parents[0] / '2024_reference_tables/adj_edges.csv'
-    adj_edge_df = pd.read_csv(file_path_raw_or).drop(columns=['Unnamed: 0'],axis=1)
+    file_path_adj_or = Path(__file__).parents[0] / '2024_reference_tables/adj_edges.csv'
+    adj_edge_df = pd.read_csv(file_path_adj_or).drop(columns=['Unnamed: 0'],axis=1)
     adj_edge_df_modi = adj_edge_df.copy()
     adj_edge_df_modi['color_clicked_modi'] = np.where(adj_edge_df_modi['color']=='#c9c9c9',adj_edge_df_modi['color_clicked'],'#0000ff')
     adj_edge_df_modi['color']='#c9c9c9'
@@ -70,13 +70,8 @@ def ADJ_ODDS_RATIOS():
 
 
 def Interactive_Plot(data):
-    # current_directory = os.getcwd()
-    # nodes_file_name = '2024_reference_tables/node_tsne.csv'
-    # nodes_full_path = os.path.join(current_directory, nodes_file_name)
-    # node_df = pd.read_csv(nodes_full_path).set_index('node')
-
-    file_path_raw_or = Path(__file__).parents[0] / '2024_reference_tables/node_tsne.csv'
-    node_df = pd.read_csv(file_path_raw_or).set_index('node') #.drop(columns=['Unnamed: 0'],axis=1)
+    file_path_nodes = Path(__file__).parents[0] / '2024_reference_tables/node_tsne.csv'
+    node_df = pd.read_csv(file_path_nodes).set_index('node')
     
     edge_df = data
     

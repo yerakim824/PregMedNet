@@ -18,6 +18,7 @@ from sklearn.manifold import TSNE
 
 import time
 import math
+from pathlib import Path
 
 import bokeh
 from bokeh.io import output_notebook, show, save,output_file
@@ -118,12 +119,17 @@ with tab2:
                               ('Both Cohorts', 'Main Analysis Cohort', 'Validation Cohort'))        
 
         if option=='Both Cohorts':
-            ddi_edge = pd.read_csv('2024_reference_tables/drug-drug-interactions/ddi_edge_both_cohort_df.csv').drop(columns=['Unnamed: 0'], axis=1)
+            file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_both_cohort_df.csv'
+            ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0'], axis=1)
         elif option =='Main Analysis Cohort':
-            ddi_edge = pd.read_csv('2024_reference_tables/drug-drug-interactions/ddi_edge_discovery_cohort_df.csv').drop(columns=['Unnamed: 0','Unnamed: 0.1'], axis=1)
+            file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_discovery_cohort_df.csv'
+            ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0'], axis=1)
         else:
-            ddi_edge = pd.read_csv('2024_reference_tables/drug-drug-interactions/ddi_edge_validation_cohort_df.csv').drop(columns=['Unnamed: 0','Unnamed: 0.1'], axis=1)
-        ddi_node = pd.read_csv('2024_reference_tables/drug-drug-interactions/ddi_node_df.csv')
+            file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_validation_cohort_df.csv'
+            ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0','Unnamed: 0.1'], axis=1)
+
+        file_path_ddi_node = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_node_df.csv'
+        ddi_node = pd.read_csv(file_path_ddi_node)
         data = st.dataframe(ddi_edge[['Disease','Med1','Med2','b3','pval(b3)','OR_1','OR_2','OR_12']])
     with col2:
         st.subheader("Drug-Drug Interaction Graph")
