@@ -26,6 +26,7 @@ from bokeh import events
 from bokeh.io import show
 from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn, Row
 
+from pathlib import Path
 import os
 
 final_color_dict = {'Disease': '#696969',
@@ -49,11 +50,9 @@ final_color_dict = {'Disease': '#696969',
 markers = [plt.Line2D([0,0],[0,0],color=color, marker='o', linestyle='') for color in final_color_dict.values()]
 
 
-def RAW_ODDS_RATIOS():
-    current_directory = os.getcwd()
-    raw_or_file_name = '2024_reference_tables/raw_edges.csv'
-    raw_or_full_path = os.path.join(current_directory, raw_or_file_name)
-    raw_edge_df = pd.read_csv(raw_or_full_path).drop(columns=['Unnamed: 0'],axis=1)
+def RAW_ODDS_RATIOS():    
+    file_path_raw_or = Path(__file__).parents[0] / '2024_reference_tables/raw_edges.csv'
+    raw_edge_df = pd.read_csv(file_path_raw_or).drop(columns=['Unnamed: 0'],axis=1)
     raw_edge_df_modi = raw_edge_df.copy()
     raw_edge_df_modi['color_clicked_modi'] = np.where(raw_edge_df_modi['color']=='#c9c9c9',raw_edge_df_modi['color_clicked'],'#0000ff')
     raw_edge_df_modi['color']='#c9c9c9'
@@ -61,24 +60,24 @@ def RAW_ODDS_RATIOS():
     return raw_edge_df_modi
 
 def ADJ_ODDS_RATIOS():
-    current_directory = os.getcwd()
-    adj_or_file_name = '2024_reference_tables/adj_edges.csv'
-    raw_or_full_path = os.path.join(current_directory, adj_or_file_name)
-    adj_edge_df = pd.read_csv(raw_or_full_path).drop(columns=['Unnamed: 0'],axis=1)
+    file_path_raw_or = Path(__file__).parents[0] / '2024_reference_tables/adj_edges.csv'
+    adj_edge_df = pd.read_csv(file_path_raw_or).drop(columns=['Unnamed: 0'],axis=1)
     adj_edge_df_modi = adj_edge_df.copy()
     adj_edge_df_modi['color_clicked_modi'] = np.where(adj_edge_df_modi['color']=='#c9c9c9',adj_edge_df_modi['color_clicked'],'#0000ff')
     adj_edge_df_modi['color']='#c9c9c9'
     adj_edge_df_modi = adj_edge_df_modi.drop(columns=['color_clicked']).rename(columns={'color_clicked_modi':'color_clicked'})
     return adj_edge_df_modi
 
-# def DDI_BOTH():
-#     ddi_both = pd.read_csv()
 
 def Interactive_Plot(data):
-    current_directory = os.getcwd()
-    nodes_file_name = '2024_reference_tables/node_tsne.csv'
-    nodes_full_path = os.path.join(current_directory, nodes_file_name)
-    node_df = pd.read_csv(nodes_full_path).set_index('node')
+    # current_directory = os.getcwd()
+    # nodes_file_name = '2024_reference_tables/node_tsne.csv'
+    # nodes_full_path = os.path.join(current_directory, nodes_file_name)
+    # node_df = pd.read_csv(nodes_full_path).set_index('node')
+
+    file_path_raw_or = Path(__file__).parents[0] / '2024_reference_tables/node_tsne.csv'
+    node_df = pd.read_csv(file_path_raw_or).set_index('node') #.drop(columns=['Unnamed: 0'],axis=1)
+    
     edge_df = data
     
     ## Final Edge Info to edge_list ##
