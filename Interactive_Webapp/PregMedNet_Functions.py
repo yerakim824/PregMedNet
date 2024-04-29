@@ -26,6 +26,8 @@ from bokeh import events
 from bokeh.io import show
 from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn, Row
 
+import os
+
 final_color_dict = {'Disease': '#696969',
  'Anti-Infective Agents': '#e43972',
  'Immunosuppressants': '#a6bbff',
@@ -48,6 +50,8 @@ markers = [plt.Line2D([0,0],[0,0],color=color, marker='o', linestyle='') for col
 
 
 def RAW_ODDS_RATIOS():
+    print("Current working directory:", os.getcwd())
+    print("Files in directory:", os.listdir('2024_reference_tables'))
     raw_edge_df = pd.read_csv('2024_reference_tables/raw_edges.csv').drop(columns=['Unnamed: 0'],axis=1)
     raw_edge_df_modi = raw_edge_df.copy()
     raw_edge_df_modi['color_clicked_modi'] = np.where(raw_edge_df_modi['color']=='#c9c9c9',raw_edge_df_modi['color_clicked'],'#0000ff')
