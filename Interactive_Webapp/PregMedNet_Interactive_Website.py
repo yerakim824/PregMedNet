@@ -67,7 +67,7 @@ with tab1:
 
         gg = st.slider("Select p-value limit (Default=0.050)", 0.010, 0.100, value=0.050 ,step=0.005)
         
-
+        st.cache_clear()
         if option=='Raw Odds Ratios':
             dataframe = RAW_ODDS_RATIOS()
         else:
