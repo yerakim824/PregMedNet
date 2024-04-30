@@ -137,7 +137,33 @@ with tab2:
         show(p)
         st.bokeh_chart(p, use_container_width=True)
         
-
+with tab3:
+    st.markdown("""
+    <style>
+    .subtitle {
+        font-size:35px;
+        text-align:center;
+    }
+    .centered-text {
+        text-align: center;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    st.markdown('<div class="subtitle">Select the list of confounders and calculate</div>', unsafe_allow_html=True)
+    st.markdown('<div class="centered-text"> In this section, you can select maternal medications, neonatal complications, and a list of potential covariates of interest. The adjusted odds ratios will be calculated using LassoNoExp.</div>', unsafe_allow_html=True)
+    option = st.selectbox(
+    'Select the neonatal complication',
+    ('Email', 'Home phone', 'Mobile phone'))
+    option = st.selectbox(
+    'Select the maternal medication calss',
+    ('Email', 'Home phone', 'Mobile phone'))
+    option = st.selectbox(
+    'Select the maternal medication',
+    ('Email', 'Home phone', 'Mobile phone'))
+    options = st.multiselect(
+    'Select the list of covariates that will be used to adjust the odds ratios',
+    ['Green', 'Yellow', 'Red', 'Blue'],
+    ['Yellow', 'Red'])
 
 
 
