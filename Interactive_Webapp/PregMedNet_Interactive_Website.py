@@ -187,7 +187,7 @@ with tab3:
                                 'Autonomic Drugs', 'Gastrointestinal Drugs',
                                 'Blood Form/Coagul Agents', 'Vitamins & Comb',
                                 'Respiratory Tract Agents', 'Pharmaceutical Aids/Adjuvants',
-                                'Antineoplastic Agents', 'Serums, Toxoids, Vaccines','Other Medications', 'Other Medications'))
+                                'Antineoplastic Agents', 'Serums, Toxoids, Vaccines','Other Medications'))
     medication = st.selectbox(
     '(3) Select the maternal medication',
     ('Email', 'Home phone', 'Mobile phone'))
