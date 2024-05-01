@@ -152,13 +152,36 @@ with tab3:
     st.markdown('<div class="subtitle">Select the list of confounders and calculate</div>', unsafe_allow_html=True)
     st.markdown('<div class="centered-text"> In this section, you can select maternal medications, neonatal complications, and a list of potential covariates of interest. The adjusted odds ratios will be calculated using LassoNoExp.</div>', unsafe_allow_html=True)
     option = st.selectbox(
-    '<div class="subtitle">Select the neonatal complication test test test</div>',
+    '(1) Select the neonatal complication test test test',
+    ('Kernicterus',
+        'TTN',
+        'RDS',
+        'Sepsis',
+        'IVH',
+        'GALD',
+        'Seizures',
+        'NEC',
+        'PPHN',
+        'Hypoglycemia',
+        'NAS',
+        'Arrhythmia',
+        'Pneumonia',
+        'UTI',
+        'Jaundice',
+        'SGA',
+        'LGA',
+        'Postmaturity',
+        'Neonatal_Death',
+        'ROP',
+        'BPD_OLD',
+        'Anemia_AOP',
+        'Anemia_All',
+        'Other_Resp_Dis'))
+    option = st.selectbox(
+    '(2) Select the maternal medication calss',
     ('Email', 'Home phone', 'Mobile phone'))
     option = st.selectbox(
-    'Select the maternal medication calss',
-    ('Email', 'Home phone', 'Mobile phone'))
-    option = st.selectbox(
-    'Select the maternal medication',
+    '(3) Select the maternal medication',
     ('Email', 'Home phone', 'Mobile phone'))
     options = st.multiselect(
     'Select the list of covariates that will be used to adjust the odds ratios',
