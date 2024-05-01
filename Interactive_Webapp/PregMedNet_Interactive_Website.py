@@ -188,9 +188,10 @@ with tab3:
                                 'Blood Form/Coagul Agents', 'Vitamins & Comb',
                                 'Respiratory Tract Agents', 'Pharmaceutical Aids/Adjuvants',
                                 'Antineoplastic Agents', 'Serums, Toxoids, Vaccines','Other Medications'))
+    med_class_df = pd.read_csv('2024_reference_tables/node_tsne.csv')
+    med_tuple = tuple(med_class_df[med_class_df['New_Med_Group']==med_class]['node'])
     medication = st.selectbox(
-    '(3) Select the maternal medication',
-    ('Email', 'Home phone', 'Mobile phone'))
+    '(3) Select the maternal medication',med_tuple)
     covariates = st.multiselect(
     'Select the list of covariates that will be used to adjust the odds ratios',
     ['Green', 'Yellow', 'Red', 'Blue'],
