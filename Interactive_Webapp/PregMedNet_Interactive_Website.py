@@ -65,21 +65,9 @@ with tab1:
         st.subheader('Select Analysis')        
         option = st.selectbox('Select Analysis Type (Default: Raw Odds Ratios)',     
                               ('Raw Odds Ratios', 'Adjusted Odds Ratios'))
-
         gg = st.slider("Select p-value limit (Default=0.050)", 0.010, 0.100, value=0.050 ,step=0.005)
-        
-        if option=='Raw Odds Ratios':
-            dataframe = RAW_ODDS_RATIOS()
-        else:
-            dataframe = ADJ_ODDS_RATIOS()
-
-        dataframe['95% CI (LL)']=round(dataframe['95% CI (LL)'],4)
-        dataframe['95% CI (UL)']=round(dataframe['95% CI (UL)'],4)
-        dataframe['95% CI']=list(zip(dataframe['95% CI (LL)'],dataframe['95% CI (UL)']))
-
-
         min_limit = st.number_input('Odds Ratio Limit: Insert min odds ratio limit (Default=No Limit)',value=np.nan)
-        max_limit = st.number_input('Odds Ratio Limit: Insert max odds ratio limit (Default=No Limit, Max ={} )'.format(math.ceil(dataframe['odds ratio'].max())),value=np.nan)
+        max_limit = st.number_input('Odds Ratio Limit: Insert max odds ratio limit (Default=No Limit)',value=np.nan)
         if np.isnan(min_limit):
             min_display='No Min Limit'
         else:
@@ -89,26 +77,35 @@ with tab1:
         else:
             max_display=max_limit
 
-        if ~np.isnan(min_limit):
-            dataframe=dataframe[dataframe['odds ratio']>=min_limit]
-        if ~np.isnan(max_limit):
-            dataframe=dataframe[dataframe['odds ratio']<=max_limit]
+        if st.button("Calculate"):
+            if option=='Raw Odds Ratios':
+                dataframe = RAW_ODDS_RATIOS()
+            else:
+                dataframe = ADJ_ODDS_RATIOS()
 
-        st.markdown("""---""")
+            dataframe['95% CI (LL)']=round(dataframe['95% CI (LL)'],4)
+            dataframe['95% CI (UL)']=round(dataframe['95% CI (UL)'],4)
+            dataframe['95% CI']=list(zip(dataframe['95% CI (LL)'],dataframe['95% CI (UL)']))
+            if ~np.isnan(min_limit):
+                dataframe=dataframe[dataframe['odds ratio']>=min_limit]
+            if ~np.isnan(max_limit):
+                dataframe=dataframe[dataframe['odds ratio']<=max_limit]
 
-        st.subheader("Correlation List")
-        st.caption('Total Number of significant correlations: {}'.format(dataframe.shape[0]))
-        data = st.dataframe(dataframe[['Disease','Medication','odds ratio','95% CI','p-val']])#,'Count'
-        st.markdown("""---""")
-        st.subheader("Selected Correlations")
-        st.caption('Selected Correlations from the Network Graph')
+            st.markdown("""---""")
 
-    with col2:
-        st.subheader("PregMedNet Network Graph")
-        st.write('Analysis Type: {} | P-Value limit: {} | Odds Ratio range: {} ~ {} | Total Number of Correlations: {}'.format(option,gg,min_display,max_display,dataframe.shape[0]))
-        p = Interactive_Plot(dataframe)
-        show(p)
-        st.bokeh_chart(p, use_container_width=True)
+            st.subheader("Correlation List")
+            st.caption('Total Number of significant correlations: {}'.format(dataframe.shape[0]))
+            data = st.dataframe(dataframe[['Disease','Medication','odds ratio','95% CI','p-val']])#,'Count'
+            st.markdown("""---""")
+            st.subheader("Selected Correlations")
+            st.caption('Selected Correlations from the Network Graph')
+
+            with col2:
+                st.subheader("PregMedNet Network Graph")
+                st.write('Analysis Type: {} | P-Value limit: {} | Odds Ratio range: {} ~ {} | Total Number of Correlations: {}'.format(option,gg,min_display,max_display,dataframe.shape[0]))
+                p = Interactive_Plot(dataframe)
+                show(p)
+                st.bokeh_chart(p, use_container_width=True)
         
 
 with tab2:
