@@ -268,12 +268,12 @@ with tab3:
 
 
 
-# aesthetics
-p.toolbar.logo = None
-p.toolbar_location = None
-p.background_fill_alpha = 0
-p.border_fill_alpha = 0
-p.axis.axis_label_text_font_style = 'bold'
-p.axis.axis_label_text_font_size = "16pt"
-p.axis.major_label_text_font_size = "16pt"
-p.legend.visible=False
+# # aesthetics
+# p.toolbar.logo = None
+# p.toolbar_location = None
+# p.background_fill_alpha = 0
+# p.border_fill_alpha = 0
+# p.axis.axis_label_text_font_style = 'bold'
+# p.axis.axis_label_text_font_size = "16pt"
+# p.axis.major_label_text_font_size = "16pt"
+# p.legend.visible=False
