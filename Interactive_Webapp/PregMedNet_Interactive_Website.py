@@ -114,25 +114,25 @@ with tab2:
         st.subheader('Select Database for the Analysis')        
         option = st.selectbox('Select Dataset (Default: Both Cohorts)',     
                               ('Both Cohorts', 'Main Analysis Cohort', 'Validation Cohort'))        
+        if st.button("Display"):
+            if option=='Both Cohorts':
+                file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_both_cohort_df.csv'
+                ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0'], axis=1)
+            elif option =='Main Analysis Cohort':
+                file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_discovery_cohort_df.csv'
+                ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0'], axis=1)
+            else:
+                file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_validation_cohort_df.csv'
+                ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0','Unnamed: 0.1'], axis=1)
 
-        if option=='Both Cohorts':
-            file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_both_cohort_df.csv'
-            ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0'], axis=1)
-        elif option =='Main Analysis Cohort':
-            file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_discovery_cohort_df.csv'
-            ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0'], axis=1)
-        else:
-            file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_validation_cohort_df.csv'
-            ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0','Unnamed: 0.1'], axis=1)
-
-        file_path_ddi_node = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_node_df.csv'
-        ddi_node = pd.read_csv(file_path_ddi_node)
-        data = st.dataframe(ddi_edge[['Disease','Med1','Med2','b3','pval(b3)','OR_1','OR_2','OR_12']])
-    with col2:
-        st.subheader("Drug-Drug Interaction Graph")
-        p = DDI_Plot(ddi_node,ddi_edge)
-        show(p)
-        st.bokeh_chart(p, use_container_width=True)
+            file_path_ddi_node = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_node_df.csv'
+            ddi_node = pd.read_csv(file_path_ddi_node)
+            data = st.dataframe(ddi_edge[['Disease','Med1','Med2','b3','pval(b3)','OR_1','OR_2','OR_12']])
+            with col2:
+                st.subheader("Drug-Drug Interaction Graph")
+                p = DDI_Plot(ddi_node,ddi_edge)
+                show(p)
+                st.bokeh_chart(p, use_container_width=True)
         
 with tab3:
     st.markdown("""
