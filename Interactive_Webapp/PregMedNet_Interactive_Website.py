@@ -264,6 +264,11 @@ with tab3:
     'Select the list of covariates that will be used to adjust the odds ratios',
     confounder_list,
     ['GESTATIONAL_AGE','AGE_MOM'])
+    # if st.button("Calculate"):
+    #     print(disease,medication,covariates)
+    #     df = pd.read_csv('2024_reference_tables/final_mother_baby_dyads_data/FINAL_MOM_BABY_DATA_cleaned_May2024.csv')
+    #     df = df.set_index('ENROLID_BABY')
+        
 
 
 
