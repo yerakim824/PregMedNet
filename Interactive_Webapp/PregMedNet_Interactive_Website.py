@@ -266,15 +266,13 @@ with tab3:
     confounder_list,
     ['GESTATIONAL_AGE','AGE_MOM'])
     if st.button("Calculate"):
-        st.write(disease,medication,covariates)
-        directory = os.getcwd()
-        st.write(directory)
-        # file_path_df1 = '2024_reference_tables/final_mother_baby_dyads_data/FINAL_MOM_BABY_DATA_DF1.csv'
-        # file_path_df2 = '2024_reference_tables/final_mother_baby_dyads_data/FINAL_MOM_BABY_DATA_DF2.csv'
-        # df1 = pd.read_csv(file_path_df1).set_index('ENROLID_BABY')
-        # df2 = pd.read_csv(file_path_df2).set_index('ENROLID_BABY')
-        # df = pd.concat([df1,df2])
-        # print('file loaded!')
+        # file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_both_cohort_df.csv'
+        file_path_df1 =  Path(__file__).parents[0] / '2024_reference_tables/final_mother_baby_dyads_data/FINAL_MOM_BABY_DATA_DF1.csv'
+        file_path_df2 =  Path(__file__).parents[0] / '2024_reference_tables/final_mother_baby_dyads_data/FINAL_MOM_BABY_DATA_DF2.csv'
+        df1 = pd.read_csv(file_path_df1).set_index('ENROLID_BABY')
+        df2 = pd.read_csv(file_path_df2).set_index('ENROLID_BABY')
+        df = pd.concat([df1,df2])
+        print('file loaded!')
 
 
 
