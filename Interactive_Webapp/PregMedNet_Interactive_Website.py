@@ -269,10 +269,11 @@ with tab3:
         file_path_df1 =  Path(__file__).parents[0] / '2024_reference_tables/final_mother_baby_dyads_data/FINAL_MOM_BABY_DATA_DF1.csv'
         file_path_df2 =  Path(__file__).parents[0] / '2024_reference_tables/final_mother_baby_dyads_data/FINAL_MOM_BABY_DATA_DF2.csv'
         st.write('start to load data')
-        df1 = pd.read_csv(file_path_df1).set_index('ENROLID_BABY')
-        df2 = pd.read_csv(file_path_df2).set_index('ENROLID_BABY')
+        df1 = pd.read_csv(file_path_df1)#.set_index('ENROLID_BABY')
+        df2 = pd.read_csv(file_path_df2)#.set_index('ENROLID_BABY')
         df = pd.concat([df1,df2])
         st.write('file loaded!')
+        data = st.dataframe(df)
 
 
 
