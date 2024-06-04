@@ -77,7 +77,7 @@ with tab1:
         else:
             max_display=max_limit
 
-        if st.button("Calculate"):
+        if st.button("Display"):
             if option=='Raw Odds Ratios':
                 dataframe = RAW_ODDS_RATIOS()
             else:
@@ -114,7 +114,7 @@ with tab2:
         st.subheader('Select Database for the Analysis')        
         option = st.selectbox('Select Dataset (Default: Both Cohorts)',     
                               ('Both Cohorts', 'Main Analysis Cohort', 'Validation Cohort'))        
-        if st.button("Display"):
+        if st.button("Display DDI"):
             if option=='Both Cohorts':
                 file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_both_cohort_df.csv'
                 ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0'], axis=1)
