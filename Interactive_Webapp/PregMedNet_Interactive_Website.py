@@ -273,7 +273,7 @@ with tab3:
         df2 = pd.read_csv(file_path_df2)#.set_index('ENROLID_BABY')
         df = pd.concat([df1,df2])
         st.write('file loaded!')
-        data = st.dataframe(df)
+
 
 
 
