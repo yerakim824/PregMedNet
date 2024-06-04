@@ -6,6 +6,7 @@ from bokeh.plotting import figure
 from bokeh.models import Band, ColumnDataSource
 from bokeh.layouts import column, gridplot
 import base64
+import os
 
 import pandas as pd
 import numpy as np
