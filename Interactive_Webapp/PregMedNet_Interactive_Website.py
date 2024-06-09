@@ -33,7 +33,7 @@ from bokeh import events
 from bokeh.io import show
 from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn, Row
 
-from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, Interactive_Plot, DDI_Plot, medication_id, disease_id
+from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, Interactive_Plot, DDI_Plot
 
 
 
