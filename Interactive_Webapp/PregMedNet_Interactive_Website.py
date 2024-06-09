@@ -276,12 +276,14 @@ with tab3:
         
 with tab4:
     st.subheader('Select the maternal medication and neonatal complications')  
+    med_id_df = pd.read_csv('2024_reference_tables/medication_id_crosswalk.csv').drop(columns=['Unnamed: 0'])
+    dz_id_df = pd.read_csv('2024_reference_tables/disease_id_crosswalk.csv').drop(columns=['Unnamed: 0'])
     medication = st.selectbox(
                             '(1) Select the maternal medication',
-                            tuple(medication_id['Medication'].unique()))
+                            tuple(med_id_df['Medication'].unique()))
     disease = st.selectbox(
         '(2) Select the neonatal complication',
-        tuple(disease_id[~disease_id['PrimeKG'].isna()]['PrimeKG'].unique())
+        tuple(dz_id_df[~dz_id_df['PrimeKG'].isna()]['PrimeKG'].unique())
     )
     
 
