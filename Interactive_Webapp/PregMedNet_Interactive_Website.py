@@ -275,9 +275,11 @@ with tab3:
         st.write('file loaded!')
         
 with tab4:
-    st.subheader('Select the maternal medication and neonatal complications')  
-    med_id_df = pd.read_csv('2024_reference_tables/medication_id_crosswalk.csv').drop(columns=['Unnamed: 0'])
-    dz_id_df = pd.read_csv('2024_reference_tables/disease_id_crosswalk.csv').drop(columns=['Unnamed: 0'])
+    st.subheader('Select the maternal medication and neonatal complications')
+    file_path_med =  Path(__file__).parents[0] / '2024_reference_tables/medication_id_crosswalk.csv'
+    file_path_dz =  Path(__file__).parents[0] / '2024_reference_tables/disease_id_crosswalk.csv'
+    med_id_df = pd.read_csv(file_path_med).drop(columns=['Unnamed: 0'])
+    dz_id_df = pd.read_csv(file_path_dz).drop(columns=['Unnamed: 0'])
     medication = st.selectbox(
                             '(1) Select the maternal medication',
                             tuple(med_id_df['Medication'].unique()))
