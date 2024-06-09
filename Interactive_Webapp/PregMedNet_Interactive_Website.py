@@ -33,7 +33,7 @@ from bokeh import events
 from bokeh.io import show
 from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn, Row
 
-from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, Interactive_Plot, DDI_Plot
+from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, Interactive_Plot, DDI_Plot, medication_id, disease_id
 
 
 
@@ -273,7 +273,17 @@ with tab3:
         df2 = pd.read_csv(file_path_df2)#.set_index('ENROLID_BABY')
         df = pd.concat([df1,df2])
         st.write('file loaded!')
-
+        
+with tab4:
+    st.subheader('Select the maternal medication and neonatal complications')  
+    medication = st.selectbox(
+                            '(1) Select the maternal medication',
+                            tuple(medication_id['Medication'].unique()))
+    disease = st.selectbox(
+        '(2) Select the neonatal complication',
+        tuple(disease_id[~disease_id['PrimeKG'].isna()]['PrimeKG'].unique())
+    )
+    
 
 
 

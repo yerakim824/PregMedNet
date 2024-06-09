@@ -299,6 +299,14 @@ def DDI_Plot(ddi_node,ddi_edge):
     
     return plot
 
+def medication_id():
+    med_id_df = pd.read_csv('2024_reference_tables/medication_id_crosswalk.csv').drop(columns=['Unnamed: 0'])
+    return med_id_df
+
+def disease_id():
+    dz_id_df = pd.read_csv('2024_reference_tables/disease_id_crosswalk.csv').drop(columns=['Unnamed: 0'])
+    return dz_id_df
+
 
     
     

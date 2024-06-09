@@ -1,0 +1,29 @@
+,MarketScan,PrimeKG,node_type,node_id
+0,Postmaturity_Baby,,,
+1,NAS_Baby,neonatal abstinence syndrome,disease,5566
+2,Hypoglycemia_Baby,Neonatal hypoglycemia,effect/phenotype,1998
+3,Hypoglycemia_Baby,Neonatal hypoglycemia,effect/phenotype,1998
+4,TTN_Baby,,,
+5,BPD_OLD_Baby,bronchopulmonary dysplasia,disease,19091
+6,Other_Resp_Dis_Baby,,,
+7,Jaundice_Baby,neonatal jaundice,disease,6584
+8,LGA_Baby,Large for gestational age,effect/phenotype,1520
+9,LGA_Baby,Large for gestational age,effect/phenotype,1520
+10,Neonatal_Death_Baby,Neonatal death,effect/phenotype,3811
+11,Neonatal_Death_Baby,Neonatal death,effect/phenotype,3811
+12,RDS_Baby,newborn respiratory distress syndrome,disease,9971
+13,Pneumonia_Baby,,,
+14,Sepsis_Baby,Neonatal sepsis,effect/phenotype,40187
+15,Sepsis_Baby,Neonatal sepsis,effect/phenotype,40187
+16,SGA_Baby,Small for gestational age,effect/phenotype,1518
+17,SGA_Baby,Small for gestational age,effect/phenotype,1518
+18,ROP_Baby,Retinopathy of prematurity,effect/phenotype,500049
+19,ROP_Baby,Retinopathy of prematurity,effect/phenotype,500049
+20,ROP_Baby,retinopathy of prematurity,disease,6952
+21,Arrhythmia_Baby,,,
+22,UTI_Baby,neonatal urinary tract infectious disease,disease,1791
+23,IVH_Baby,Intraventricular hemorrhage,effect/phenotype,30746
+24,IVH_Baby,Intraventricular hemorrhage,effect/phenotype,30746
+25,Seizures_Baby,Neonatal seizure,effect/phenotype,32807
+26,Anemia_All_Baby,neonatal anemia,disease,1240
+27,Anemia_AOP_Baby,anemia of prematurity,disease,1239
