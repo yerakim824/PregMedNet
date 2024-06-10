@@ -285,6 +285,10 @@ with tab4:
         '(2) Select the maternal medication',
         tuple(pair_id_df[pair_id_df['dz_name_display']==disease]['Medication'].unique())
     )
+    if st.button("Displaying the Mechanism of Action"):
+        sel_dz_id_list = list(pair_id_df[pair_id_df['dz_name_display']==disease]['dz_id'].unique())
+        sel_med_id_list=list(pair_id_df[pair_id_df['Medication']==medication]['med_id'].unique())
+
     
 
 
