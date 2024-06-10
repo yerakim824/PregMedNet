@@ -136,6 +136,73 @@ with tab2:
                 st.bokeh_chart(p, use_container_width=True)
         
 with tab3:
+    st.subheader('Select the maternal medication and neonatal complications')
+    file_path_pair =  Path(__file__).parents[0] / '2024_reference_tables/mechanism_dz_med_df.csv'
+    pair_id_df = pd.read_csv(file_path_pair).drop(columns=['Unnamed: 0'])
+    disease = st.selectbox(
+                            '(1) Select the neonatal complication',
+                            tuple(pair_id_df['dz_name_display'].unique()))
+    medication = st.selectbox(
+        '(2) Select the maternal medication',
+        tuple(pair_id_df[pair_id_df['dz_name_display']==disease]['Medication'].unique())
+    )
+    if st.button("Display the Mechanism of Action"):
+        sel_dz_id_list = list(pair_id_df[pair_id_df['dz_name_display']==disease]['dz_id'].unique())
+        sel_med_id = list(pair_id_df[pair_id_df['Medication']==medication]['med_id'].unique())[0]
+        
+        # kg_path = Path(__file__).parents[0] / '2024_reference_tables/kg.csv'
+        kg_path = '2024_reference_tables/kg.csv'
+        kg = pd.read_csv(kg_path)
+        sel_relation = [
+                        'drug_protein',
+                        'protein_protein',
+                        'disease_protein',
+                        'bioprocess_protein','molfunc_protein','cellcomp_protein',
+                        'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
+                        ]
+        sel_sel_relation = [
+                        'protein_protein',
+                        'bioprocess_protein','molfunc_protein','cellcomp_protein',
+                        'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
+                        ]
+        sel_kg = kg[kg['relation'].isin(sel_relation)].reset_index().drop(columns=['index','x_index','y_index'],axis=1) ## 4.3 million nodes (8.1M previouslydd)
+        sel_sel_kg = sel_kg[sel_kg['relation'].isin(sel_sel_relation)]
+        dz_kg = sel_kg[sel_kg['x_id'].isin(sel_dz_id_list)]
+        med_kg = sel_kg[sel_kg['x_id']==sel_med_id]
+        sel_sel_kg = pd.concat([sel_sel_kg,dz_kg,med_kg])
+        node_list = make_node_list(sel_sel_kg)
+        edge_list = make_edge_list(sel_sel_kg)
+        
+        G = nx.Graph()
+        G.add_nodes_from(node_list)
+        G.add_edges_from(edge_list)
+        
+        num = 0
+        count_nodes = []
+        for path in nx.all_shortest_paths(G, source=sel_med_id, target=sel_dz_id_list[0]):
+            print(path)
+            count_nodes+=path
+            num+=1
+
+        import matplotlib.patches as mpatches #matplotlib.patches.Circle
+        gene = mpatches.Patch(color='#16AEEF', label='gene/protein')
+        drug = mpatches.Patch(color='#946BE1', label='drug')
+        bio = mpatches.Patch(color='#FF781E', label='biological_process')
+        mole = mpatches.Patch(color='#FF9F21', label='molecular_function')
+        cell = mpatches.Patch(color='#F9CF57', label='cellular_component')
+        dz = mpatches.Patch(color='#5DC264', label='disease')
+
+        plt.figure(figsize=(20,14))
+        T= G.subgraph(count_nodes)
+        node_color = [i['node_color'] for i in dict(T.nodes).values()]
+        labels = nx.get_node_attributes(T, 'node_name') 
+        # plt.title(' and Ondansetron')
+        nx.draw(T,labels=labels,with_labels=True,font_size=7,edge_color='#DBDBDB',node_color=node_color,node_size=[T.degree(n)*100 for n in T.nodes()])
+        plt.legend(handles=[gene,drug,bio,mole,cell,dz])
+        show(p)
+
+        
+with tab4:
     st.markdown("""
     <style>
     .subtitle {
@@ -266,75 +333,7 @@ with tab3:
     confounder_list,
     ['GESTATIONAL_AGE','AGE_MOM'])
     if st.button("Calculate"):
-        st.write('You need to upload your file!')
-        
-with tab4:
-    st.subheader('Select the maternal medication and neonatal complications')
-    file_path_pair =  Path(__file__).parents[0] / '2024_reference_tables/mechanism_dz_med_df.csv'
-    pair_id_df = pd.read_csv(file_path_pair).drop(columns=['Unnamed: 0'])
-    disease = st.selectbox(
-                            '(1) Select the neonatal complication',
-                            tuple(pair_id_df['dz_name_display'].unique()))
-    medication = st.selectbox(
-        '(2) Select the maternal medication',
-        tuple(pair_id_df[pair_id_df['dz_name_display']==disease]['Medication'].unique())
-    )
-    if st.button("Display the Mechanism of Action"):
-        sel_dz_id_list = list(pair_id_df[pair_id_df['dz_name_display']==disease]['dz_id'].unique())
-        sel_med_id = list(pair_id_df[pair_id_df['Medication']==medication]['med_id'].unique())[0]
-        
-        # kg_path = Path(__file__).parents[0] / '2024_reference_tables/kg.csv'
-        kg_path = '2024_reference_tables/kg.csv'
-        kg = pd.read_csv(kg_path)
-        sel_relation = [
-                        'drug_protein',
-                        'protein_protein',
-                        'disease_protein',
-                        'bioprocess_protein','molfunc_protein','cellcomp_protein',
-                        'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
-                        ]
-        sel_sel_relation = [
-                        'protein_protein',
-                        'bioprocess_protein','molfunc_protein','cellcomp_protein',
-                        'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
-                        ]
-        sel_kg = kg[kg['relation'].isin(sel_relation)].reset_index().drop(columns=['index','x_index','y_index'],axis=1) ## 4.3 million nodes (8.1M previouslydd)
-        sel_sel_kg = sel_kg[sel_kg['relation'].isin(sel_sel_relation)]
-        dz_kg = sel_kg[sel_kg['x_id'].isin(sel_dz_id_list)]
-        med_kg = sel_kg[sel_kg['x_id']==sel_med_id]
-        sel_sel_kg = pd.concat([sel_sel_kg,dz_kg,med_kg])
-        node_list = make_node_list(sel_sel_kg)
-        edge_list = make_edge_list(sel_sel_kg)
-        
-        G = nx.Graph()
-        G.add_nodes_from(node_list)
-        G.add_edges_from(edge_list)
-        
-        num = 0
-        count_nodes = []
-        for path in nx.all_shortest_paths(G, source=sel_med_id, target=sel_dz_id_list[0]):
-            print(path)
-            count_nodes+=path
-            num+=1
-
-        import matplotlib.patches as mpatches #matplotlib.patches.Circle
-        gene = mpatches.Patch(color='#16AEEF', label='gene/protein')
-        drug = mpatches.Patch(color='#946BE1', label='drug')
-        bio = mpatches.Patch(color='#FF781E', label='biological_process')
-        mole = mpatches.Patch(color='#FF9F21', label='molecular_function')
-        cell = mpatches.Patch(color='#F9CF57', label='cellular_component')
-        dz = mpatches.Patch(color='#5DC264', label='disease')
-
-        plt.figure(figsize=(20,14))
-        T= G.subgraph(count_nodes)
-        node_color = [i['node_color'] for i in dict(T.nodes).values()]
-        labels = nx.get_node_attributes(T, 'node_name') 
-        # plt.title(' and Ondansetron')
-        nx.draw(T,labels=labels,with_labels=True,font_size=7,edge_color='#DBDBDB',node_color=node_color,node_size=[T.degree(n)*100 for n in T.nodes()])
-        plt.legend(handles=[gene,drug,bio,mole,cell,dz])
-        show(p)
-
-    
+        st.write('You need to upload your file!')    
 
 
 
