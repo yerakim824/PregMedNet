@@ -266,13 +266,7 @@ with tab3:
     confounder_list,
     ['GESTATIONAL_AGE','AGE_MOM'])
     if st.button("Calculate"):
-        file_path_df1 =  Path(__file__).parents[0] / '2024_reference_tables/final_mother_baby_dyads_data/FINAL_MOM_BABY_DATA_DF1.csv'
-        file_path_df2 =  Path(__file__).parents[0] / '2024_reference_tables/final_mother_baby_dyads_data/FINAL_MOM_BABY_DATA_DF2.csv'
-        st.write('start to load data')
-        df1 = pd.read_csv(file_path_df1)#.set_index('ENROLID_BABY')
-        df2 = pd.read_csv(file_path_df2)#.set_index('ENROLID_BABY')
-        df = pd.concat([df1,df2])
-        st.write('file loaded!')
+        st.write('You need to upload your file!')
         
 with tab4:
     st.subheader('Select the maternal medication and neonatal complications')
@@ -289,7 +283,8 @@ with tab4:
         sel_dz_id_list = list(pair_id_df[pair_id_df['dz_name_display']==disease]['dz_id'].unique())
         sel_med_id = list(pair_id_df[pair_id_df['Medication']==medication]['med_id'].unique())[0]
         
-        kg = pd.read_csv('2024_reference_tables/kg.csv')
+        kg_path = Path(__file__).parents[0] / '2024_reference_tables/kg.csv'
+        kg = pd.read_csv(kg_path)
         sel_relation = [
                         'drug_protein',
                         'protein_protein',
@@ -316,7 +311,7 @@ with tab4:
         
         num = 0
         count_nodes = []
-        for path in nx.all_shortest_paths(G, source=sel_med_id_list[0], target=sel_dz_id_list[0]):
+        for path in nx.all_shortest_paths(G, source=sel_med_id, target=sel_dz_id_list[0]):
             print(path)
             count_nodes+=path
             num+=1
