@@ -276,16 +276,14 @@ with tab3:
         
 with tab4:
     st.subheader('Select the maternal medication and neonatal complications')
-    file_path_med =  Path(__file__).parents[0] / '2024_reference_tables/medication_id_crosswalk.csv'
-    file_path_dz =  Path(__file__).parents[0] / '2024_reference_tables/disease_id_crosswalk.csv'
-    med_id_df = pd.read_csv(file_path_med).drop(columns=['Unnamed: 0'])
-    dz_id_df = pd.read_csv(file_path_dz).drop(columns=['Unnamed: 0'])
-    medication = st.selectbox(
-                            '(1) Select the maternal medication',
-                            tuple(med_id_df['Medication'].unique()))
+    file_path_pair =  Path(__file__).parents[0] / '2024_reference_tables/mechanism_dz_med_df.csv'
+    pair_id_df = pd.read_csv(file_path_pair).drop(columns=['Unnamed: 0'])
     disease = st.selectbox(
-        '(2) Select the neonatal complication',
-        tuple(dz_id_df[~dz_id_df['PrimeKG'].isna()]['PrimeKG'].unique())
+                            '(1) Select the neonatal complication',
+                            tuple(pair_id_df['dz_name_display'].unique()))
+    medication = st.selectbox(
+        '(2) Select the maternal medication',
+        tuple(pair_id_df[pair_id_df['dz_name_display']==disease]['Medication'].unique())
     )
     
 

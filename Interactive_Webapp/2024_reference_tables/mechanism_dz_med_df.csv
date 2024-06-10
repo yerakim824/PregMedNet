@@ -1,0 +1,242 @@
+,Disease,Medication,med_id,dz_name_display,node_type,dz_id
+0,NAS_Baby,"Acetaminophen, Oral",DB00316,Neonatal Abstinence Syndrome (NAS),disease,5566
+1,Hypoglycemia_Baby,"Glyburide, Oral",DB01016,Neonatal Hypoglycemia,effect/phenotype,1998
+2,Hypoglycemia_Baby,"Glyburide, Oral",DB01016,Neonatal Hypoglycemia,effect/phenotype,1998
+3,NAS_Baby,"Oxycodone, Oral",DB00497,Neonatal Abstinence Syndrome (NAS),disease,5566
+4,BPD_OLD_Baby,"Sertraline, Oral",DB01104,Bronchopulmonary Dysplasia (BPD),disease,19091
+5,Jaundice_Baby,"Terbutaline, Oral",DB00871,Neonatal Jaundice,disease,6584
+6,LGA_Baby,"Ascorbic acid, Oral",DB00126,Large for Gestational Age (LGA),effect/phenotype,1520
+7,LGA_Baby,"Ascorbic acid, Oral",DB00126,Large for Gestational Age (LGA),effect/phenotype,1520
+8,Neonatal_Death_Baby,"Doconexent, Oral",DB03756,Neonatal Death,effect/phenotype,3811
+9,Neonatal_Death_Baby,"Doconexent, Oral",DB03756,Neonatal Death,effect/phenotype,3811
+10,LGA_Baby,"Folic acid, Oral",DB00158,Large for Gestational Age (LGA),effect/phenotype,1520
+11,LGA_Baby,"Folic acid, Oral",DB00158,Large for Gestational Age (LGA),effect/phenotype,1520
+12,LGA_Baby,"Calcium, Oral",DB01373,Large for Gestational Age (LGA),effect/phenotype,1520
+13,LGA_Baby,"Calcium, Oral",DB01373,Large for Gestational Age (LGA),effect/phenotype,1520
+14,NAS_Baby,"Ondansetron, Oral",DB00904,Neonatal Abstinence Syndrome (NAS),disease,5566
+15,RDS_Baby,"Oxycodone, Oral",DB00497,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+16,Jaundice_Baby,"Iodine, Oral",DB05382,Neonatal Jaundice,disease,6584
+17,LGA_Baby,"Prenatal Vitamins, Oral",YK00002,Large for Gestational Age (LGA),effect/phenotype,1520
+18,LGA_Baby,"Prenatal Vitamins, Oral",YK00002,Large for Gestational Age (LGA),effect/phenotype,1520
+19,NAS_Baby,"Hydrocodone, Oral",DB00956,Neonatal Abstinence Syndrome (NAS),disease,5566
+20,Jaundice_Baby,"Calcium, Oral",DB01373,Neonatal Jaundice,disease,6584
+21,BPD_OLD_Baby,"Fluoxetine, Oral",DB00472,Bronchopulmonary Dysplasia (BPD),disease,19091
+22,Jaundice_Baby,"Folic acid, Oral",DB00158,Neonatal Jaundice,disease,6584
+23,LGA_Baby,"Omega-3 fatty acids, Oral",DB11133,Large for Gestational Age (LGA),effect/phenotype,1520
+24,LGA_Baby,"Omega-3 fatty acids, Oral",DB11133,Large for Gestational Age (LGA),effect/phenotype,1520
+25,Jaundice_Baby,"Nifedipine, Oral",DB01115,Neonatal Jaundice,disease,6584
+26,LGA_Baby,"Cyanocobalamin, Oral",DB00115,Large for Gestational Age (LGA),effect/phenotype,1520
+27,LGA_Baby,"Cyanocobalamin, Oral",DB00115,Large for Gestational Age (LGA),effect/phenotype,1520
+28,RDS_Baby,"Acetaminophen, Oral",DB00316,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+29,Hypoglycemia_Baby,"Prenatal Vitamins, Oral",YK00002,Neonatal Hypoglycemia,effect/phenotype,1998
+30,Hypoglycemia_Baby,"Prenatal Vitamins, Oral",YK00002,Neonatal Hypoglycemia,effect/phenotype,1998
+31,LGA_Baby,"Cholecalciferol, Oral",DB00169,Large for Gestational Age (LGA),effect/phenotype,1520
+32,LGA_Baby,"Cholecalciferol, Oral",DB00169,Large for Gestational Age (LGA),effect/phenotype,1520
+33,LGA_Baby,"Iron, Oral",DB01592,Large for Gestational Age (LGA),effect/phenotype,1520
+34,LGA_Baby,"Iron, Oral",DB01592,Large for Gestational Age (LGA),effect/phenotype,1520
+35,LGA_Baby,"Linoleic acid, Oral",DB14104,Large for Gestational Age (LGA),effect/phenotype,1520
+36,LGA_Baby,"Linoleic acid, Oral",DB14104,Large for Gestational Age (LGA),effect/phenotype,1520
+37,LGA_Baby,"Fish oil, Oral",DB13961,Large for Gestational Age (LGA),effect/phenotype,1520
+38,LGA_Baby,"Fish oil, Oral",DB13961,Large for Gestational Age (LGA),effect/phenotype,1520
+39,LGA_Baby,"Copper, Oral",DB09130,Large for Gestational Age (LGA),effect/phenotype,1520
+40,LGA_Baby,"Copper, Oral",DB09130,Large for Gestational Age (LGA),effect/phenotype,1520
+41,BPD_OLD_Baby,"Acetaminophen, Oral",DB00316,Bronchopulmonary Dysplasia (BPD),disease,19091
+42,NAS_Baby,"Buprenorphine, Sublingual",DB00921,Neonatal Abstinence Syndrome (NAS),disease,5566
+43,Neonatal_Death_Baby,"Biotin, Oral",DB00121,Neonatal Death,effect/phenotype,3811
+44,Neonatal_Death_Baby,"Biotin, Oral",DB00121,Neonatal Death,effect/phenotype,3811
+45,Hypoglycemia_Baby,"Fish oil, Oral",DB13961,Neonatal Hypoglycemia,effect/phenotype,1998
+46,Hypoglycemia_Baby,"Fish oil, Oral",DB13961,Neonatal Hypoglycemia,effect/phenotype,1998
+47,Neonatal_Death_Baby,"Cholecalciferol, Oral",DB00169,Neonatal Death,effect/phenotype,3811
+48,Neonatal_Death_Baby,"Cholecalciferol, Oral",DB00169,Neonatal Death,effect/phenotype,3811
+49,RDS_Baby,"Nitrofurantoin, Oral",DB00698,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+50,RDS_Baby,"Nifedipine, Oral",DB01115,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+51,LGA_Baby,"Nifedipine, Oral",DB01115,Large for Gestational Age (LGA),effect/phenotype,1520
+52,LGA_Baby,"Nifedipine, Oral",DB01115,Large for Gestational Age (LGA),effect/phenotype,1520
+53,BPD_OLD_Baby,"Escitalopram, Oral",DB01175,Bronchopulmonary Dysplasia (BPD),disease,19091
+54,BPD_OLD_Baby,"Linoleic acid, Oral",DB14104,Bronchopulmonary Dysplasia (BPD),disease,19091
+55,LGA_Baby,"Labetalol, Oral",DB00598,Large for Gestational Age (LGA),effect/phenotype,1520
+56,LGA_Baby,"Labetalol, Oral",DB00598,Large for Gestational Age (LGA),effect/phenotype,1520
+57,Hypoglycemia_Baby,"Linoleic acid, Oral",DB14104,Neonatal Hypoglycemia,effect/phenotype,1998
+58,Hypoglycemia_Baby,"Linoleic acid, Oral",DB14104,Neonatal Hypoglycemia,effect/phenotype,1998
+59,BPD_OLD_Baby,"Fish oil, Oral",DB13961,Bronchopulmonary Dysplasia (BPD),disease,19091
+60,LGA_Baby,"Doconexent, Oral",DB03756,Large for Gestational Age (LGA),effect/phenotype,1520
+61,LGA_Baby,"Doconexent, Oral",DB03756,Large for Gestational Age (LGA),effect/phenotype,1520
+62,BPD_OLD_Baby,"Ascorbic acid, Oral",DB00126,Bronchopulmonary Dysplasia (BPD),disease,19091
+63,Neonatal_Death_Baby,"Ascorbic acid, Oral",DB00126,Neonatal Death,effect/phenotype,3811
+64,Neonatal_Death_Baby,"Ascorbic acid, Oral",DB00126,Neonatal Death,effect/phenotype,3811
+65,RDS_Baby,"Valaciclovir, Oral",DB00577,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+66,Jaundice_Baby,"Niacin, Oral",DB00627,Neonatal Jaundice,disease,6584
+67,Jaundice_Baby,"Hydroxyzine, Oral",DB00557,Neonatal Jaundice,disease,6584
+68,BPD_OLD_Baby,"Prenatal Vitamins, Oral",YK00002,Bronchopulmonary Dysplasia (BPD),disease,19091
+69,Jaundice_Baby,"Pantoprazole, Oral",DB00213,Neonatal Jaundice,disease,6584
+70,RDS_Baby,"Ondansetron, Oral",DB00904,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+71,BPD_OLD_Baby,"Labetalol, Oral",DB00598,Bronchopulmonary Dysplasia (BPD),disease,19091
+72,BPD_OLD_Baby,"Citalopram, Oral",DB00215,Bronchopulmonary Dysplasia (BPD),disease,19091
+73,BPD_OLD_Baby,"Doconexent, Oral",DB03756,Bronchopulmonary Dysplasia (BPD),disease,19091
+74,Jaundice_Baby,"Copper, Oral",DB09130,Neonatal Jaundice,disease,6584
+75,Hypoglycemia_Baby,"Iron, Oral",DB01592,Neonatal Hypoglycemia,effect/phenotype,1998
+76,Hypoglycemia_Baby,"Iron, Oral",DB01592,Neonatal Hypoglycemia,effect/phenotype,1998
+77,RDS_Baby,"Methyldopa, Oral",DB00968,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+78,BPD_OLD_Baby,"Zolpidem, Oral",DB00425,Bronchopulmonary Dysplasia (BPD),disease,19091
+79,RDS_Baby,"Cephalexin, Oral",DB00567,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+80,Neonatal_Death_Baby,"Icosapent, Oral",DB00159,Neonatal Death,effect/phenotype,3811
+81,Neonatal_Death_Baby,"Icosapent, Oral",DB00159,Neonatal Death,effect/phenotype,3811
+82,Sepsis_Baby,"Cyanocobalamin, Oral",DB00115,Neonatal Sepsis,effect/phenotype,40187
+83,Sepsis_Baby,"Cyanocobalamin, Oral",DB00115,Neonatal Sepsis,effect/phenotype,40187
+84,BPD_OLD_Baby,"Hydrocodone, Oral",DB00956,Bronchopulmonary Dysplasia (BPD),disease,19091
+85,BPD_OLD_Baby,"Ondansetron, Oral",DB00904,Bronchopulmonary Dysplasia (BPD),disease,19091
+86,BPD_OLD_Baby,"Calcium, Oral",DB01373,Bronchopulmonary Dysplasia (BPD),disease,19091
+87,BPD_OLD_Baby,"Icosapent, Oral",DB00159,Bronchopulmonary Dysplasia (BPD),disease,19091
+88,SGA_Baby,"Azithromycin, Oral",DB00207,Small for Gestational Age (SGA),effect/phenotype,1518
+89,SGA_Baby,"Azithromycin, Oral",DB00207,Small for Gestational Age (SGA),effect/phenotype,1518
+90,LGA_Baby,"Valaciclovir, Oral",DB00577,Large for Gestational Age (LGA),effect/phenotype,1520
+91,LGA_Baby,"Valaciclovir, Oral",DB00577,Large for Gestational Age (LGA),effect/phenotype,1520
+92,Neonatal_Death_Baby,"Levothyroxine, Oral",DB00451,Neonatal Death,effect/phenotype,3811
+93,Neonatal_Death_Baby,"Levothyroxine, Oral",DB00451,Neonatal Death,effect/phenotype,3811
+94,BPD_OLD_Baby,"Omega-3 fatty acids, Oral",DB11133,Bronchopulmonary Dysplasia (BPD),disease,19091
+95,BPD_OLD_Baby,"Nifedipine, Oral",DB01115,Bronchopulmonary Dysplasia (BPD),disease,19091
+96,RDS_Baby,"Codeine, Oral",DB00318,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+97,Jaundice_Baby,"Cyanocobalamin, Oral",DB00115,Neonatal Jaundice,disease,6584
+98,RDS_Baby,"Progesterone, Oral",DB00396,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+99,NAS_Baby,"Promethazine, Oral",DB01069,Neonatal Abstinence Syndrome (NAS),disease,5566
+100,Sepsis_Baby,"Calcium, Oral",DB01373,Neonatal Sepsis,effect/phenotype,40187
+101,Sepsis_Baby,"Calcium, Oral",DB01373,Neonatal Sepsis,effect/phenotype,40187
+102,BPD_OLD_Baby,"Promethazine, Oral",DB01069,Bronchopulmonary Dysplasia (BPD),disease,19091
+103,BPD_OLD_Baby,"Fluconazole, Oral",DB00196,Bronchopulmonary Dysplasia (BPD),disease,19091
+104,BPD_OLD_Baby,"Valaciclovir, Oral",DB00577,Bronchopulmonary Dysplasia (BPD),disease,19091
+105,LGA_Baby,"Biotin, Oral",DB00121,Large for Gestational Age (LGA),effect/phenotype,1520
+106,LGA_Baby,"Biotin, Oral",DB00121,Large for Gestational Age (LGA),effect/phenotype,1520
+107,Jaundice_Baby,"Linoleic acid, Oral",DB14104,Neonatal Jaundice,disease,6584
+108,LGA_Baby,"Docusate, Oral",DB11089,Large for Gestational Age (LGA),effect/phenotype,1520
+109,LGA_Baby,"Docusate, Oral",DB11089,Large for Gestational Age (LGA),effect/phenotype,1520
+110,RDS_Baby,"Labetalol, Oral",DB00598,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+111,Jaundice_Baby,"Iron, Oral",DB01592,Neonatal Jaundice,disease,6584
+112,ROP_Baby,"Levothyroxine, Oral",DB00451,Retinopathy of Prematurity (ROP),effect/phenotype,500049
+113,ROP_Baby,"Levothyroxine, Oral",DB00451,Retinopathy of Prematurity (ROP),effect/phenotype,500049
+114,ROP_Baby,"Levothyroxine, Oral",DB00451,Retinopathy of Prematurity (ROP),disease,6952
+115,RDS_Baby,"Fluconazole, Oral",DB00196,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+116,BPD_OLD_Baby,"Caffeine, Oral",DB00201,Bronchopulmonary Dysplasia (BPD),disease,19091
+117,RDS_Baby,"Promethazine, Oral",DB01069,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+118,SGA_Baby,"Terconazole, Vaginal",DB00251,Small for Gestational Age (SGA),effect/phenotype,1518
+119,SGA_Baby,"Terconazole, Vaginal",DB00251,Small for Gestational Age (SGA),effect/phenotype,1518
+120,Jaundice_Baby,"Insulin Human Isophane (NPH), Subcutaneous",YK00006,Neonatal Jaundice,disease,6584
+121,Jaundice_Baby,"Valaciclovir, Oral",DB00577,Neonatal Jaundice,disease,6584
+122,UTI_Baby,"Amoxicillin, Oral",DB01060,neonatal urinary tract infection (UTI),disease,1791
+123,Hypoglycemia_Baby,"Copper, Oral",DB09130,Neonatal Hypoglycemia,effect/phenotype,1998
+124,Hypoglycemia_Baby,"Copper, Oral",DB09130,Neonatal Hypoglycemia,effect/phenotype,1998
+125,Jaundice_Baby,"Levothyroxine, Oral",DB00451,Neonatal Jaundice,disease,6584
+126,BPD_OLD_Baby,"Oxycodone, Oral",DB00497,Bronchopulmonary Dysplasia (BPD),disease,19091
+127,Hypoglycemia_Baby,"Folic acid, Oral",DB00158,Neonatal Hypoglycemia,effect/phenotype,1998
+128,Hypoglycemia_Baby,"Folic acid, Oral",DB00158,Neonatal Hypoglycemia,effect/phenotype,1998
+129,LGA_Baby,"Terbutaline, Oral",DB00871,Large for Gestational Age (LGA),effect/phenotype,1520
+130,LGA_Baby,"Terbutaline, Oral",DB00871,Large for Gestational Age (LGA),effect/phenotype,1520
+131,Jaundice_Baby,"Fish oil, Oral",DB13961,Neonatal Jaundice,disease,6584
+132,Sepsis_Baby,"Copper, Oral",DB09130,Neonatal Sepsis,effect/phenotype,40187
+133,Sepsis_Baby,"Copper, Oral",DB09130,Neonatal Sepsis,effect/phenotype,40187
+134,Jaundice_Baby,"Hydrocodone, Oral",DB00956,Neonatal Jaundice,disease,6584
+135,Sepsis_Baby,"Iron, Oral",DB01592,Neonatal Sepsis,effect/phenotype,40187
+136,Sepsis_Baby,"Iron, Oral",DB01592,Neonatal Sepsis,effect/phenotype,40187
+137,Jaundice_Baby,"Lamotrigine, Oral",DB00555,Neonatal Jaundice,disease,6584
+138,RDS_Baby,"Sertraline, Oral",DB01104,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+139,Jaundice_Baby,"Terconazole, Vaginal",DB00251,Neonatal Jaundice,disease,6584
+140,SGA_Baby,"Fish oil, Oral",DB13961,Small for Gestational Age (SGA),effect/phenotype,1518
+141,SGA_Baby,"Fish oil, Oral",DB13961,Small for Gestational Age (SGA),effect/phenotype,1518
+142,Hypoglycemia_Baby,"Terconazole, Vaginal",DB00251,Neonatal Hypoglycemia,effect/phenotype,1998
+143,Hypoglycemia_Baby,"Terconazole, Vaginal",DB00251,Neonatal Hypoglycemia,effect/phenotype,1998
+144,Jaundice_Baby,"Guaifenesin, Oral",DB00874,Neonatal Jaundice,disease,6584
+145,BPD_OLD_Baby,"Butalbital, Oral",DB00241,Bronchopulmonary Dysplasia (BPD),disease,19091
+146,RDS_Baby,"Hydrocodone, Oral",DB00956,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+147,Jaundice_Baby,"Cholecalciferol, Oral",DB00169,Neonatal Jaundice,disease,6584
+148,SGA_Baby,"Linoleic acid, Oral",DB14104,Small for Gestational Age (SGA),effect/phenotype,1518
+149,SGA_Baby,"Linoleic acid, Oral",DB14104,Small for Gestational Age (SGA),effect/phenotype,1518
+150,Jaundice_Baby,"Reduced Diphtheria Toxoid, Intramuscular",YK00016,Neonatal Jaundice,disease,6584
+151,Sepsis_Baby,"Oxycodone, Oral",DB00497,Neonatal Sepsis,effect/phenotype,40187
+152,Sepsis_Baby,"Oxycodone, Oral",DB00497,Neonatal Sepsis,effect/phenotype,40187
+153,BPD_OLD_Baby,"Iron, Oral",DB01592,Bronchopulmonary Dysplasia (BPD),disease,19091
+154,Jaundice_Baby,"Influenza Virus Vaccine (Subvirion), Intramuscular",YK00012,Neonatal Jaundice,disease,6584
+155,LGA_Baby,"Hydrocodone, Oral",DB00956,Large for Gestational Age (LGA),effect/phenotype,1520
+156,LGA_Baby,"Hydrocodone, Oral",DB00956,Large for Gestational Age (LGA),effect/phenotype,1520
+157,Sepsis_Baby,"Ascorbic acid, Oral",DB00126,Neonatal Sepsis,effect/phenotype,40187
+158,Sepsis_Baby,"Ascorbic acid, Oral",DB00126,Neonatal Sepsis,effect/phenotype,40187
+159,LGA_Baby,"Acetaminophen, Oral",DB00316,Large for Gestational Age (LGA),effect/phenotype,1520
+160,LGA_Baby,"Acetaminophen, Oral",DB00316,Large for Gestational Age (LGA),effect/phenotype,1520
+161,IVH_Baby,"Calcium, Oral",DB01373,Intraventricular Hemorrhage (IVH),effect/phenotype,30746
+162,IVH_Baby,"Calcium, Oral",DB01373,Intraventricular Hemorrhage (IVH),effect/phenotype,30746
+163,Neonatal_Death_Baby,"Valaciclovir, Oral",DB00577,Neonatal Death,effect/phenotype,3811
+164,Neonatal_Death_Baby,"Valaciclovir, Oral",DB00577,Neonatal Death,effect/phenotype,3811
+165,Neonatal_Death_Baby,"Iron, Oral",DB01592,Neonatal Death,effect/phenotype,3811
+166,Neonatal_Death_Baby,"Iron, Oral",DB01592,Neonatal Death,effect/phenotype,3811
+167,Neonatal_Death_Baby,"Fish oil, Oral",DB13961,Neonatal Death,effect/phenotype,3811
+168,Neonatal_Death_Baby,"Fish oil, Oral",DB13961,Neonatal Death,effect/phenotype,3811
+169,BPD_OLD_Baby,"Glyburide, Oral",DB01016,Bronchopulmonary Dysplasia (BPD),disease,19091
+170,Neonatal_Death_Baby,"Linoleic acid, Oral",DB14104,Neonatal Death,effect/phenotype,3811
+171,Neonatal_Death_Baby,"Linoleic acid, Oral",DB14104,Neonatal Death,effect/phenotype,3811
+172,RDS_Baby,"Butalbital, Oral",DB00241,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+173,Jaundice_Baby,"Hydrocortisone, Topical application",DB00741,Neonatal Jaundice,disease,6584
+174,BPD_OLD_Baby,"Nitrofurantoin, Oral",DB00698,Bronchopulmonary Dysplasia (BPD),disease,19091
+175,LGA_Baby,"Pantothenic acid, Oral",DB01783,Large for Gestational Age (LGA),effect/phenotype,1520
+176,LGA_Baby,"Pantothenic acid, Oral",DB01783,Large for Gestational Age (LGA),effect/phenotype,1520
+177,BPD_OLD_Baby,"Insulin lispro, Injection",DB00046,Bronchopulmonary Dysplasia (BPD),disease,19091
+178,BPD_OLD_Baby,"Nystatin, Topical application",DB00646,Bronchopulmonary Dysplasia (BPD),disease,19091
+179,RDS_Baby,"Caffeine, Oral",DB00201,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+180,IVH_Baby,"Cyanocobalamin, Oral",DB00115,Intraventricular Hemorrhage (IVH),effect/phenotype,30746
+181,IVH_Baby,"Cyanocobalamin, Oral",DB00115,Intraventricular Hemorrhage (IVH),effect/phenotype,30746
+182,RDS_Baby,"Metronidazole, Oral",DB00916,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+183,RDS_Baby,"Indomethacin, Oral",DB00328,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+184,LGA_Baby,"Glyburide, Oral",DB01016,Large for Gestational Age (LGA),effect/phenotype,1520
+185,LGA_Baby,"Glyburide, Oral",DB01016,Large for Gestational Age (LGA),effect/phenotype,1520
+186,Hypoglycemia_Baby,"Levothyroxine, Oral",DB00451,Neonatal Hypoglycemia,effect/phenotype,1998
+187,Hypoglycemia_Baby,"Levothyroxine, Oral",DB00451,Neonatal Hypoglycemia,effect/phenotype,1998
+188,Hypoglycemia_Baby,"Calcium, Oral",DB01373,Neonatal Hypoglycemia,effect/phenotype,1998
+189,Hypoglycemia_Baby,"Calcium, Oral",DB01373,Neonatal Hypoglycemia,effect/phenotype,1998
+190,ROP_Baby,"Doconexent, Oral",DB03756,Retinopathy of Prematurity (ROP),effect/phenotype,500049
+191,ROP_Baby,"Doconexent, Oral",DB03756,Retinopathy of Prematurity (ROP),effect/phenotype,500049
+192,ROP_Baby,"Doconexent, Oral",DB03756,Retinopathy of Prematurity (ROP),disease,6952
+193,ROP_Baby,"Prenatal Vitamins, Oral",YK00002,Retinopathy of Prematurity (ROP),effect/phenotype,500049
+194,ROP_Baby,"Prenatal Vitamins, Oral",YK00002,Retinopathy of Prematurity (ROP),effect/phenotype,500049
+195,ROP_Baby,"Prenatal Vitamins, Oral",YK00002,Retinopathy of Prematurity (ROP),disease,6952
+196,Hypoglycemia_Baby,"Methyldopa, Oral",DB00968,Neonatal Hypoglycemia,effect/phenotype,1998
+197,Hypoglycemia_Baby,"Methyldopa, Oral",DB00968,Neonatal Hypoglycemia,effect/phenotype,1998
+198,Jaundice_Baby,"Human Rho(D) immune globulin, Intramuscular",DB11597,Neonatal Jaundice,disease,6584
+199,Hypoglycemia_Baby,"Insulin lispro, Injection",DB00046,Neonatal Hypoglycemia,effect/phenotype,1998
+200,Hypoglycemia_Baby,"Insulin lispro, Injection",DB00046,Neonatal Hypoglycemia,effect/phenotype,1998
+201,LGA_Baby,"Ondansetron, Oral",DB00904,Large for Gestational Age (LGA),effect/phenotype,1520
+202,LGA_Baby,"Ondansetron, Oral",DB00904,Large for Gestational Age (LGA),effect/phenotype,1520
+203,RDS_Baby,"Fluoxetine, Oral",DB00472,Newborn Respiratory Distress Syndrome (RDS),disease,9971
+204,Jaundice_Baby,"Methylprednisolone, Oral",DB00959,Neonatal Jaundice,disease,6584
+205,Seizures_Baby,"Prenatal Vitamins, Oral",YK00002,Neonatal Seizure,effect/phenotype,32807
+206,BPD_OLD_Baby,"Pantoprazole, Oral",DB00213,Bronchopulmonary Dysplasia (BPD),disease,19091
+207,Anemia_All_Baby,"Valaciclovir, Oral",DB00577,Neonatal Anemia,disease,1240
+208,BPD_OLD_Baby,"Progesterone, Oral",DB00396,Bronchopulmonary Dysplasia (BPD),disease,19091
+209,LGA_Baby,"Enoxaparin, Subcutaneous",DB01225,Large for Gestational Age (LGA),effect/phenotype,1520
+210,LGA_Baby,"Enoxaparin, Subcutaneous",DB01225,Large for Gestational Age (LGA),effect/phenotype,1520
+211,BPD_OLD_Baby,"Cephalexin, Oral",DB00567,Bronchopulmonary Dysplasia (BPD),disease,19091
+212,Jaundice_Baby,"Azithromycin, Oral",DB00207,Neonatal Jaundice,disease,6584
+213,BPD_OLD_Baby,"Bupropion, Oral",DB01156,Bronchopulmonary Dysplasia (BPD),disease,19091
+214,BPD_OLD_Baby,"Methyldopa, Oral",DB00968,Bronchopulmonary Dysplasia (BPD),disease,19091
+215,SGA_Baby,"Labetalol, Oral",DB00598,Small for Gestational Age (SGA),effect/phenotype,1518
+216,SGA_Baby,"Labetalol, Oral",DB00598,Small for Gestational Age (SGA),effect/phenotype,1518
+217,Jaundice_Baby,"Ascorbic acid, Oral",DB00126,Neonatal Jaundice,disease,6584
+218,Neonatal_Death_Baby,"Folic acid, Oral",DB00158,Neonatal Death,effect/phenotype,3811
+219,Neonatal_Death_Baby,"Folic acid, Oral",DB00158,Neonatal Death,effect/phenotype,3811
+220,BPD_OLD_Baby,"Cyanocobalamin, Oral",DB00115,Bronchopulmonary Dysplasia (BPD),disease,19091
+221,Anemia_All_Baby,"Nifedipine, Oral",DB01115,Neonatal Anemia,disease,1240
+222,Neonatal_Death_Baby,"Prenatal Vitamins, Oral",YK00002,Neonatal Death,effect/phenotype,3811
+223,Neonatal_Death_Baby,"Prenatal Vitamins, Oral",YK00002,Neonatal Death,effect/phenotype,3811
+224,Jaundice_Baby,"Calcium carbonate, Oral",DB06724,Neonatal Jaundice,disease,6584
+225,Hypoglycemia_Baby,"Acetaminophen, Oral",DB00316,Neonatal Hypoglycemia,effect/phenotype,1998
+226,Hypoglycemia_Baby,"Acetaminophen, Oral",DB00316,Neonatal Hypoglycemia,effect/phenotype,1998
+227,Jaundice_Baby,"Metoprolol, Oral",DB00264,Neonatal Jaundice,disease,6584
+228,Hypoglycemia_Baby,"Insulin aspart, Injection",DB01306,Neonatal Hypoglycemia,effect/phenotype,1998
+229,Hypoglycemia_Baby,"Insulin aspart, Injection",DB01306,Neonatal Hypoglycemia,effect/phenotype,1998
+230,LGA_Baby,"Heparin, Injection",DB01109,Large for Gestational Age (LGA),effect/phenotype,1520
+231,LGA_Baby,"Heparin, Injection",DB01109,Large for Gestational Age (LGA),effect/phenotype,1520
+232,Jaundice_Baby,"Ursodeoxycholic acid, Oral",DB01586,Neonatal Jaundice,disease,6584
+233,NAS_Baby,"Sertraline, Oral",DB01104,Neonatal Abstinence Syndrome (NAS),disease,5566
+234,NAS_Baby,"Zolpidem, Oral",DB00425,Neonatal Abstinence Syndrome (NAS),disease,5566
+235,Jaundice_Baby,"Vitamin B Complex, Oral",YK00003,Neonatal Jaundice,disease,6584
+236,LGA_Baby,"Butalbital, Oral",DB00241,Large for Gestational Age (LGA),effect/phenotype,1520
+237,LGA_Baby,"Butalbital, Oral",DB00241,Large for Gestational Age (LGA),effect/phenotype,1520
+238,Anemia_AOP_Baby,"Valaciclovir, Oral",DB00577,Anemia of Prematurity (AOP),disease,1239
+239,Hypoglycemia_Baby,"Omega-3 fatty acids, Oral",DB11133,Neonatal Hypoglycemia,effect/phenotype,1998
+240,Hypoglycemia_Baby,"Omega-3 fatty acids, Oral",DB11133,Neonatal Hypoglycemia,effect/phenotype,1998
