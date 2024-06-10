@@ -58,7 +58,7 @@ st.markdown('<div class="centered-text">PregMedNet is a tool for assessing the s
 
 st.markdown('#')
 
-tab1, tab2, tab3, tab4 = st.tabs(["Maternal Medication Effects", "Drug-Drug Interactions","Mechanism of Action", "Select & Calculate"])
+tab1, tab2, tab3, tab4 = st.tabs(["Maternal Medication Effects", "Drug-Drug Interactions"]) #,"Mechanism of Action", "Select & Calculate"
 
 with tab1:
     col1, col2 = st.columns([1.6, 2.4]) #1,4
@@ -135,205 +135,205 @@ with tab2:
                 show(p)
                 st.bokeh_chart(p, use_container_width=True)
         
-with tab3:
-    st.subheader('Select the maternal medication and neonatal complications')
-    file_path_pair =  Path(__file__).parents[0] / '2024_reference_tables/mechanism_dz_med_df.csv'
-    pair_id_df = pd.read_csv(file_path_pair).drop(columns=['Unnamed: 0'])
-    disease = st.selectbox(
-                            '(1) Select the neonatal complication',
-                            tuple(pair_id_df['dz_name_display'].unique()))
-    medication = st.selectbox(
-        '(2) Select the maternal medication',
-        tuple(pair_id_df[pair_id_df['dz_name_display']==disease]['Medication'].unique())
-    )
-    if st.button("Display the Mechanism of Action"):
-        sel_dz_id_list = list(pair_id_df[pair_id_df['dz_name_display']==disease]['dz_id'].unique())
-        sel_med_id = list(pair_id_df[pair_id_df['Medication']==medication]['med_id'].unique())[0]
+# with tab3:
+#     st.subheader('Select the maternal medication and neonatal complications')
+#     file_path_pair =  Path(__file__).parents[0] / '2024_reference_tables/mechanism_dz_med_df.csv'
+#     pair_id_df = pd.read_csv(file_path_pair).drop(columns=['Unnamed: 0'])
+#     disease = st.selectbox(
+#                             '(1) Select the neonatal complication',
+#                             tuple(pair_id_df['dz_name_display'].unique()))
+#     medication = st.selectbox(
+#         '(2) Select the maternal medication',
+#         tuple(pair_id_df[pair_id_df['dz_name_display']==disease]['Medication'].unique())
+#     )
+#     if st.button("Display the Mechanism of Action"):
+#         sel_dz_id_list = list(pair_id_df[pair_id_df['dz_name_display']==disease]['dz_id'].unique())
+#         sel_med_id = list(pair_id_df[pair_id_df['Medication']==medication]['med_id'].unique())[0]
         
-        kg_path = Path(__file__).parents[0] / '2024_reference_tables/kg.csv'
-        # kg_path = '2024_reference_tables/kg.csv'
-        kg = pd.read_csv(kg_path)
-        sel_relation = [
-                        'drug_protein',
-                        'protein_protein',
-                        'disease_protein',
-                        'bioprocess_protein','molfunc_protein','cellcomp_protein',
-                        'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
-                        ]
-        sel_sel_relation = [
-                        'protein_protein',
-                        'bioprocess_protein','molfunc_protein','cellcomp_protein',
-                        'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
-                        ]
-        sel_kg = kg[kg['relation'].isin(sel_relation)].reset_index().drop(columns=['index','x_index','y_index'],axis=1) ## 4.3 million nodes (8.1M previouslydd)
-        sel_sel_kg = sel_kg[sel_kg['relation'].isin(sel_sel_relation)]
-        dz_kg = sel_kg[sel_kg['x_id'].isin(sel_dz_id_list)]
-        med_kg = sel_kg[sel_kg['x_id']==sel_med_id]
-        sel_sel_kg = pd.concat([sel_sel_kg,dz_kg,med_kg])
-        node_list = make_node_list(sel_sel_kg)
-        edge_list = make_edge_list(sel_sel_kg)
+#         kg_path = Path(__file__).parents[0] / '2024_reference_tables/kg.csv'
+#         # kg_path = '2024_reference_tables/kg.csv'
+#         kg = pd.read_csv(kg_path)
+#         sel_relation = [
+#                         'drug_protein',
+#                         'protein_protein',
+#                         'disease_protein',
+#                         'bioprocess_protein','molfunc_protein','cellcomp_protein',
+#                         'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
+#                         ]
+#         sel_sel_relation = [
+#                         'protein_protein',
+#                         'bioprocess_protein','molfunc_protein','cellcomp_protein',
+#                         'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
+#                         ]
+#         sel_kg = kg[kg['relation'].isin(sel_relation)].reset_index().drop(columns=['index','x_index','y_index'],axis=1) ## 4.3 million nodes (8.1M previouslydd)
+#         sel_sel_kg = sel_kg[sel_kg['relation'].isin(sel_sel_relation)]
+#         dz_kg = sel_kg[sel_kg['x_id'].isin(sel_dz_id_list)]
+#         med_kg = sel_kg[sel_kg['x_id']==sel_med_id]
+#         sel_sel_kg = pd.concat([sel_sel_kg,dz_kg,med_kg])
+#         node_list = make_node_list(sel_sel_kg)
+#         edge_list = make_edge_list(sel_sel_kg)
         
-        G = nx.Graph()
-        G.add_nodes_from(node_list)
-        G.add_edges_from(edge_list)
+#         G = nx.Graph()
+#         G.add_nodes_from(node_list)
+#         G.add_edges_from(edge_list)
         
-        num = 0
-        count_nodes = []
-        for path in nx.all_shortest_paths(G, source=sel_med_id, target=sel_dz_id_list[0]):
-            print(path)
-            count_nodes+=path
-            num+=1
+#         num = 0
+#         count_nodes = []
+#         for path in nx.all_shortest_paths(G, source=sel_med_id, target=sel_dz_id_list[0]):
+#             print(path)
+#             count_nodes+=path
+#             num+=1
 
-        import matplotlib.patches as mpatches #matplotlib.patches.Circle
-        gene = mpatches.Patch(color='#16AEEF', label='gene/protein')
-        drug = mpatches.Patch(color='#946BE1', label='drug')
-        bio = mpatches.Patch(color='#FF781E', label='biological_process')
-        mole = mpatches.Patch(color='#FF9F21', label='molecular_function')
-        cell = mpatches.Patch(color='#F9CF57', label='cellular_component')
-        dz = mpatches.Patch(color='#5DC264', label='disease')
+#         import matplotlib.patches as mpatches #matplotlib.patches.Circle
+#         gene = mpatches.Patch(color='#16AEEF', label='gene/protein')
+#         drug = mpatches.Patch(color='#946BE1', label='drug')
+#         bio = mpatches.Patch(color='#FF781E', label='biological_process')
+#         mole = mpatches.Patch(color='#FF9F21', label='molecular_function')
+#         cell = mpatches.Patch(color='#F9CF57', label='cellular_component')
+#         dz = mpatches.Patch(color='#5DC264', label='disease')
 
-        plt.figure(figsize=(20,14))
-        T= G.subgraph(count_nodes)
-        node_color = [i['node_color'] for i in dict(T.nodes).values()]
-        labels = nx.get_node_attributes(T, 'node_name') 
-        # plt.title(' and Ondansetron')
-        nx.draw(T,labels=labels,with_labels=True,font_size=7,edge_color='#DBDBDB',node_color=node_color,node_size=[T.degree(n)*100 for n in T.nodes()])
-        plt.legend(handles=[gene,drug,bio,mole,cell,dz])
-        show(p)
+#         plt.figure(figsize=(20,14))
+#         T= G.subgraph(count_nodes)
+#         node_color = [i['node_color'] for i in dict(T.nodes).values()]
+#         labels = nx.get_node_attributes(T, 'node_name') 
+#         # plt.title(' and Ondansetron')
+#         nx.draw(T,labels=labels,with_labels=True,font_size=7,edge_color='#DBDBDB',node_color=node_color,node_size=[T.degree(n)*100 for n in T.nodes()])
+#         plt.legend(handles=[gene,drug,bio,mole,cell,dz])
+#         show(p)
 
         
-with tab4:
-    st.markdown("""
-    <style>
-    .subtitle {
-        font-size:25px;
-        text-align:center;
-    }
-    .centered-text {
-        text-align: center;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    st.markdown('<div class="subtitle">Select the list of confounders and calculate</div>', unsafe_allow_html=True)
-    st.markdown('<div class="centered-text"> In this section, you can select maternal medications, neonatal complications, and a list of potential covariates of interest. The adjusted odds ratios will be calculated using LassoNoExp.</div>', unsafe_allow_html=True)
-    disease = st.selectbox(
-                            '(1) Select the neonatal complication',
-                            ('Kernicterus',
-                                'Transient Tachypnea of Newborn (TTN)',
-                                'Respiratory Distress Syndrome (RDS)',
-                                'Sepsis',
-                                'Intraventricular Hemorrhage (IVH)',
-                                'Gestational Alloimmune Liver Disease (GALD)',
-                                'Seizures',
-                                'Necrotizing Enterocolitis(NEC)',
-                                'Persistent Pulmonary Hypertension of Newborn (PPHN)',
-                                'Hypoglycemia',
-                                'Neonatal Abstinence Syndrome (NAS)',
-                                'Arrhythmia',
-                                'Pneumonia',
-                                'Urinary Tract Infection (UTI)',
-                                'Jaundice',
-                                'Small for Gestational Age (SGA)',
-                                'Large for Gestational Age (LGA)',
-                                'Postmaturity',
-                                'Neonatal Death',
-                                'Retinopathy of Prematurity (ROP)',
-                                'Bronchopulmonary Dysplasia (BPD)',
-                                'Anemia of Prematurity',
-                                'Anemia (All)',
-                                'Other Respiratory Diseases of Newborns'))
-    med_class = st.selectbox(
-                            '(2) Select the maternal medication class',
-                            ('Anti-Infective Agents',
-                                'Immunosuppressants', 'Hormones & Synthetic Subst',
-                                'Cardiovascular Agents', 'Central Nervous System',
-                                'Electrolytic, Caloric, Water', 'Eye, Ear, Nose Throat',
-                                'Antihistamines & Comb.', 'Skin & Mucous Membrane',
-                                'Autonomic Drugs', 'Gastrointestinal Drugs',
-                                'Blood Form/Coagul Agents', 'Vitamins & Comb',
-                                'Respiratory Tract Agents', 'Pharmaceutical Aids/Adjuvants',
-                                'Antineoplastic Agents', 'Serums, Toxoids, Vaccines','Other Medications'))
+# with tab4:
+#     st.markdown("""
+#     <style>
+#     .subtitle {
+#         font-size:25px;
+#         text-align:center;
+#     }
+#     .centered-text {
+#         text-align: center;
+#     }
+#     </style>
+#     """, unsafe_allow_html=True)
+#     st.markdown('<div class="subtitle">Select the list of confounders and calculate</div>', unsafe_allow_html=True)
+#     st.markdown('<div class="centered-text"> In this section, you can select maternal medications, neonatal complications, and a list of potential covariates of interest. The adjusted odds ratios will be calculated using LassoNoExp.</div>', unsafe_allow_html=True)
+#     disease = st.selectbox(
+#                             '(1) Select the neonatal complication',
+#                             ('Kernicterus',
+#                                 'Transient Tachypnea of Newborn (TTN)',
+#                                 'Respiratory Distress Syndrome (RDS)',
+#                                 'Sepsis',
+#                                 'Intraventricular Hemorrhage (IVH)',
+#                                 'Gestational Alloimmune Liver Disease (GALD)',
+#                                 'Seizures',
+#                                 'Necrotizing Enterocolitis(NEC)',
+#                                 'Persistent Pulmonary Hypertension of Newborn (PPHN)',
+#                                 'Hypoglycemia',
+#                                 'Neonatal Abstinence Syndrome (NAS)',
+#                                 'Arrhythmia',
+#                                 'Pneumonia',
+#                                 'Urinary Tract Infection (UTI)',
+#                                 'Jaundice',
+#                                 'Small for Gestational Age (SGA)',
+#                                 'Large for Gestational Age (LGA)',
+#                                 'Postmaturity',
+#                                 'Neonatal Death',
+#                                 'Retinopathy of Prematurity (ROP)',
+#                                 'Bronchopulmonary Dysplasia (BPD)',
+#                                 'Anemia of Prematurity',
+#                                 'Anemia (All)',
+#                                 'Other Respiratory Diseases of Newborns'))
+#     med_class = st.selectbox(
+#                             '(2) Select the maternal medication class',
+#                             ('Anti-Infective Agents',
+#                                 'Immunosuppressants', 'Hormones & Synthetic Subst',
+#                                 'Cardiovascular Agents', 'Central Nervous System',
+#                                 'Electrolytic, Caloric, Water', 'Eye, Ear, Nose Throat',
+#                                 'Antihistamines & Comb.', 'Skin & Mucous Membrane',
+#                                 'Autonomic Drugs', 'Gastrointestinal Drugs',
+#                                 'Blood Form/Coagul Agents', 'Vitamins & Comb',
+#                                 'Respiratory Tract Agents', 'Pharmaceutical Aids/Adjuvants',
+#                                 'Antineoplastic Agents', 'Serums, Toxoids, Vaccines','Other Medications'))
     
-    file_path_medication = Path(__file__).parents[0] / '2024_reference_tables/node_tsne.csv'
-    med_class_df = pd.read_csv(file_path_medication)
-    med_tuple = tuple(med_class_df[med_class_df['New_Med_Group']==med_class]['node'])
+#     file_path_medication = Path(__file__).parents[0] / '2024_reference_tables/node_tsne.csv'
+#     med_class_df = pd.read_csv(file_path_medication)
+#     med_tuple = tuple(med_class_df[med_class_df['New_Med_Group']==med_class]['node'])
     
-    confounder_list = ['SEX',
-                            'EGEOLOC',
-                            'GESTATIONAL_AGE',
-                            'AGE_MOM',
-                            'Anemia_Mom',
-                            'Asthma_Mom',
-                            'SUD_Alcohol_Mom',
-                            'Anxiety_Mom',
-                            'Bipolar_Disorder_Mom',
-                            'Cesarean_Section_Mom',
-                            'PTB_Mom',
-                            'Autoimmune_Mom',
-                            'APLS_Mom',
-                            'STD_Mom',
-                            'Hyperemesis_Gravidarum_Mom',
-                            'Headache_Mom',
-                            'Migraine_Mom',
-                            'ADHD_Mom',
-                            'Alcohol_Withdrawal_Mom',
-                            'Catatonic_Mom',
-                            'Chronic_Pain_Mom',
-                            'SUD_Cocaine_Mom',
-                            'Depression_Mom',
-                            'Eating_Disorder_Mom',
-                            'Eclampsia_Mom',
-                            'Epilepsy_Mom',
-                            'Infertility_Mom',
-                            'GDM_Mom',
-                            'SUD_Hallucinogen_Mom',
-                            'SUD_Marijuana_Mom',
-                            'Obesity_Mom',
-                            'SUD_Opi_Heroin_Mom',
-                            'SUD_Opi_Methadone_Mom',
-                            'SUD_Opioid_All_Mom',
-                            'Other_Psy_Analgesics_Mom',
-                            'Other_Psy_Anesthetics_Mom',
-                            'Other_Psy_antiparkinson_Mom',
-                            'Other_Psy_antidepressants_Mom',
-                            'Other_Psy_antiepileptics_Mom',
-                            'Other_Psy_antipsychotics_Mom',
-                            'Other_Psy_other_psychotropic_Mom',
-                            'Placenta_Abruption_Mom',
-                            'DM_Mom',
-                            'HTN_Mom',
-                            'SUD_Psychostimulant_all_Mom',
-                            'Renal_disease_Mom',
-                            'Schizophrenia_Mom',
-                            'Score_Alcohol_Mom',
-                            'Score_Chronic_Renal_Mom',
-                            'Score_Congestive_HF_Mom',
-                            'Score_Chronic_IHD_Mom',
-                            'Score_Congenital_Heart_Mom',
-                            'Score_Drug_Abuse_Mom',
-                            'Score_Eclampsia_Mom',
-                            'Score_Gestational_HTN_Mom',
-                            'Score_HIV_Mom',
-                            'Score_Mild_Preeclampsia_Mom',
-                            'Score_Placenta_Previa_Mom',
-                            'Score_Previous_Cesarean_Mom',
-                            'Score_Pul_HTN_Mom',
-                            'Score_SCD_Mom',
-                            'Score_SLE_Mom',
-                            'Score_Valvular_HD_Mom',
-                            'SUD_Sedative_All_Mom',
-                            'SUD_Sedtv_Barbiturate_Mom',
-                            'SUD_Sedtv_BZD_Mom',
-                            'Sleep_Disorders_Mom',
-                            'SUD_Smoking_Mom']
-    medication = st.selectbox(
-    '(3) Select the maternal medication',med_tuple)
-    covariates = st.multiselect(
-    'Select the list of covariates that will be used to adjust the odds ratios',
-    confounder_list,
-    ['GESTATIONAL_AGE','AGE_MOM'])
-    if st.button("Calculate"):
-        st.write('You need to upload your file!')    
+#     confounder_list = ['SEX',
+#                             'EGEOLOC',
+#                             'GESTATIONAL_AGE',
+#                             'AGE_MOM',
+#                             'Anemia_Mom',
+#                             'Asthma_Mom',
+#                             'SUD_Alcohol_Mom',
+#                             'Anxiety_Mom',
+#                             'Bipolar_Disorder_Mom',
+#                             'Cesarean_Section_Mom',
+#                             'PTB_Mom',
+#                             'Autoimmune_Mom',
+#                             'APLS_Mom',
+#                             'STD_Mom',
+#                             'Hyperemesis_Gravidarum_Mom',
+#                             'Headache_Mom',
+#                             'Migraine_Mom',
+#                             'ADHD_Mom',
+#                             'Alcohol_Withdrawal_Mom',
+#                             'Catatonic_Mom',
+#                             'Chronic_Pain_Mom',
+#                             'SUD_Cocaine_Mom',
+#                             'Depression_Mom',
+#                             'Eating_Disorder_Mom',
+#                             'Eclampsia_Mom',
+#                             'Epilepsy_Mom',
+#                             'Infertility_Mom',
+#                             'GDM_Mom',
+#                             'SUD_Hallucinogen_Mom',
+#                             'SUD_Marijuana_Mom',
+#                             'Obesity_Mom',
+#                             'SUD_Opi_Heroin_Mom',
+#                             'SUD_Opi_Methadone_Mom',
+#                             'SUD_Opioid_All_Mom',
+#                             'Other_Psy_Analgesics_Mom',
+#                             'Other_Psy_Anesthetics_Mom',
+#                             'Other_Psy_antiparkinson_Mom',
+#                             'Other_Psy_antidepressants_Mom',
+#                             'Other_Psy_antiepileptics_Mom',
+#                             'Other_Psy_antipsychotics_Mom',
+#                             'Other_Psy_other_psychotropic_Mom',
+#                             'Placenta_Abruption_Mom',
+#                             'DM_Mom',
+#                             'HTN_Mom',
+#                             'SUD_Psychostimulant_all_Mom',
+#                             'Renal_disease_Mom',
+#                             'Schizophrenia_Mom',
+#                             'Score_Alcohol_Mom',
+#                             'Score_Chronic_Renal_Mom',
+#                             'Score_Congestive_HF_Mom',
+#                             'Score_Chronic_IHD_Mom',
+#                             'Score_Congenital_Heart_Mom',
+#                             'Score_Drug_Abuse_Mom',
+#                             'Score_Eclampsia_Mom',
+#                             'Score_Gestational_HTN_Mom',
+#                             'Score_HIV_Mom',
+#                             'Score_Mild_Preeclampsia_Mom',
+#                             'Score_Placenta_Previa_Mom',
+#                             'Score_Previous_Cesarean_Mom',
+#                             'Score_Pul_HTN_Mom',
+#                             'Score_SCD_Mom',
+#                             'Score_SLE_Mom',
+#                             'Score_Valvular_HD_Mom',
+#                             'SUD_Sedative_All_Mom',
+#                             'SUD_Sedtv_Barbiturate_Mom',
+#                             'SUD_Sedtv_BZD_Mom',
+#                             'Sleep_Disorders_Mom',
+#                             'SUD_Smoking_Mom']
+#     medication = st.selectbox(
+#     '(3) Select the maternal medication',med_tuple)
+#     covariates = st.multiselect(
+#     'Select the list of covariates that will be used to adjust the odds ratios',
+#     confounder_list,
+#     ['GESTATIONAL_AGE','AGE_MOM'])
+#     if st.button("Calculate"):
+#         st.write('You need to upload your file!')    
 
 
 
