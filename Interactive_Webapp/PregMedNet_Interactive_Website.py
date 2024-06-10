@@ -58,7 +58,7 @@ st.markdown('<div class="centered-text">PregMedNet is a tool for assessing the s
 
 st.markdown('#')
 
-tab1, tab2, tab3, tab4 = st.tabs(["Maternal Medication Effects", "Drug-Drug Interactions", "Select & Calculate","Mechanism of Action"])
+tab1, tab2, tab3, tab4 = st.tabs(["Maternal Medication Effects", "Drug-Drug Interactions","Mechanism of Action", "Select & Calculate"])
 
 with tab1:
     col1, col2 = st.columns([1.6, 2.4]) #1,4
@@ -150,8 +150,8 @@ with tab3:
         sel_dz_id_list = list(pair_id_df[pair_id_df['dz_name_display']==disease]['dz_id'].unique())
         sel_med_id = list(pair_id_df[pair_id_df['Medication']==medication]['med_id'].unique())[0]
         
-        # kg_path = Path(__file__).parents[0] / '2024_reference_tables/kg.csv'
-        kg_path = '2024_reference_tables/kg.csv'
+        kg_path = Path(__file__).parents[0] / '2024_reference_tables/kg.csv'
+        # kg_path = '2024_reference_tables/kg.csv'
         kg = pd.read_csv(kg_path)
         sel_relation = [
                         'drug_protein',
