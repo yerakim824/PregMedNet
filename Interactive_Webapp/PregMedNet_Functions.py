@@ -300,6 +300,66 @@ def DDI_Plot(ddi_node,ddi_edge):
     return plot
 
 
+def make_node_list(sel_sel_kg):
+    node_color = {
+            'node_type': [
+                'gene/protein', 
+                'drug', 
+                'biological_process', 
+                'molecular_function', 
+                'cellular_component', 
+                'disease'
+            ],
+            'color': [
+                '#16AEEF', 
+                '#946BE1', 
+                '#FF781E', 
+                '#FF9F21', 
+                '#F9CF57', 
+                '#5DC264'
+            ]
+        }
+    
+    kg_node = sel_sel_kg.drop(columns=['relation','display_relation'],axis=1)
+    x_nodes = [i for i in kg_node.columns if i.__contains__('x_')]
+    y_nodes = [i for i in kg_node.columns if i.__contains__('y_')]
+    x_nodes_new = {}
+    for i in x_nodes:
+        new_name = 'node'+i[1:]
+        x_nodes_new[i]=new_name
+    y_nodes_new = {}
+    for i in y_nodes:
+        new_name = 'node'+i[1:]
+        y_nodes_new[i]=new_name
+    kg_node_x = kg_node[x_nodes].rename(columns=x_nodes_new)
+    kg_node_y = kg_node[y_nodes].rename(columns=y_nodes_new)
+    kg_node_merge = pd.concat([kg_node_x,kg_node_y]).drop_duplicates()
+    kg_node_merge = pd.merge(kg_node_merge,node_color,on='node_type',how='left')
+    kg_node_merge = kg_node_merge.reset_index().drop(columns=['index'],axis=1)
+    merging_types = ['gene/protein',  'biological_process', 'molecular_function','cellular_component']
+    kg_node_merge['node_type_merged']=np.where(kg_node_merge['node_type'].isin(merging_types),'Biology',kg_node_merge['node_type'])
+    kg_node_merge
+    node_dict = kg_node_merge.to_dict(orient='index')
+    node_list = []
+    for key in node_dict.keys():
+        each_node=(node_dict[key]['node_id'],
+        {'node_name':node_dict[key]['node_name'],'node_type':node_dict[key]['node_type'],
+        'node_source':node_dict[key]['node_source'],'node_color':node_dict[key]['color'],
+        'node_type_merged':node_dict[key]['node_type_merged']})
+        node_list.append(each_node)
+    return node_list
+
+def make_edge_list(sel_sel_kg):
+    edge_df = sel_sel_kg[['relation','display_relation','x_id','y_id']].drop_duplicates()
+    edge_dict = edge_df.to_dict(orient='index')
+
+    edge_list = []
+    for key in edge_dict.keys():
+        each_edge = (edge_dict[key]['x_id'],edge_dict[key]['y_id'], {'relation':edge_dict[key]['relation'],'display_relation':edge_dict[key]['display_relation'],'weight':0.3,'color':'#ADADAD'})
+        edge_list.append(each_edge)
+    return edge_list
+    
+
 
     
     

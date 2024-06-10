@@ -33,7 +33,7 @@ from bokeh import events
 from bokeh.io import show
 from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn, Row
 
-from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, Interactive_Plot, DDI_Plot
+from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, Interactive_Plot, DDI_Plot, make_node_list, make_edge_list
 
 
 
@@ -285,9 +285,58 @@ with tab4:
         '(2) Select the maternal medication',
         tuple(pair_id_df[pair_id_df['dz_name_display']==disease]['Medication'].unique())
     )
-    if st.button("Displaying the Mechanism of Action"):
+    if st.button("Display the Mechanism of Action"):
         sel_dz_id_list = list(pair_id_df[pair_id_df['dz_name_display']==disease]['dz_id'].unique())
-        sel_med_id_list=list(pair_id_df[pair_id_df['Medication']==medication]['med_id'].unique())
+        sel_med_id = list(pair_id_df[pair_id_df['Medication']==medication]['med_id'].unique())[0]
+        
+        kg = pd.read_csv('2024_reference_tables/kg.csv')
+        sel_relation = [
+                        'drug_protein',
+                        'protein_protein',
+                        'disease_protein',
+                        'bioprocess_protein','molfunc_protein','cellcomp_protein',
+                        'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
+                        ]
+        sel_sel_relation = [
+                        'protein_protein',
+                        'bioprocess_protein','molfunc_protein','cellcomp_protein',
+                        'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
+                        ]
+        sel_kg = kg[kg['relation'].isin(sel_relation)].reset_index().drop(columns=['index','x_index','y_index'],axis=1) ## 4.3 million nodes (8.1M previouslydd)
+        sel_sel_kg = sel_kg[sel_kg['relation'].isin(sel_sel_relation)]
+        dz_kg = sel_kg[sel_kg['x_id'].isin(sel_dz_id_list)]
+        med_kg = sel_kg[sel_kg['x_id']==sel_med_id]
+        sel_sel_kg = pd.concat([sel_sel_kg,dz_kg,med_kg])
+        node_list = make_node_list(sel_sel_kg)
+        edge_list = make_edge_list(sel_sel_kg)
+        
+        G = nx.Graph()
+        G.add_nodes_from(node_list)
+        G.add_edges_from(edge_list)
+        
+        num = 0
+        count_nodes = []
+        for path in nx.all_shortest_paths(G, source=sel_med_id_list[0], target=sel_dz_id_list[0]):
+            print(path)
+            count_nodes+=path
+            num+=1
+
+        import matplotlib.patches as mpatches #matplotlib.patches.Circle
+        gene = mpatches.Patch(color='#16AEEF', label='gene/protein')
+        drug = mpatches.Patch(color='#946BE1', label='drug')
+        bio = mpatches.Patch(color='#FF781E', label='biological_process')
+        mole = mpatches.Patch(color='#FF9F21', label='molecular_function')
+        cell = mpatches.Patch(color='#F9CF57', label='cellular_component')
+        dz = mpatches.Patch(color='#5DC264', label='disease')
+
+        plt.figure(figsize=(20,14))
+        T= G.subgraph(count_nodes)
+        node_color = [i['node_color'] for i in dict(T.nodes).values()]
+        labels = nx.get_node_attributes(T, 'node_name') 
+        # plt.title(' and Ondansetron')
+        nx.draw(T,labels=labels,with_labels=True,font_size=7,edge_color='#DBDBDB',node_color=node_color,node_size=[T.degree(n)*100 for n in T.nodes()])
+        plt.legend(handles=[gene,drug,bio,mole,cell,dz])
+        show(p)
 
     
 
