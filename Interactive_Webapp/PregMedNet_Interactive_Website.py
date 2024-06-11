@@ -152,8 +152,8 @@ with tab3:
         sel_dz_id_list = list(pair_id_df[pair_id_df['dz_name_display']==disease]['dz_id'].unique())
         sel_med_id = list(pair_id_df[pair_id_df['Medication']==medication]['med_id'].unique())[0]
         
-        kg_path = Path(__file__).parents[0] / '2024_reference_tables/kg.csv'
-        # kg_path = '2024_reference_tables/kg.csv'
+        # kg_path = Path(__file__).parents[0] / '2024_reference_tables/kg.csv'
+        kg_path = '2024_reference_tables/kg.csv'
         kg = pd.read_csv(kg_path)
         sel_relation = [
                         'drug_protein',
