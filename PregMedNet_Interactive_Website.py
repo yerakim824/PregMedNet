@@ -153,9 +153,7 @@ with tab3:
     if st.button("Display the Mechanism of Action"):
         dz_diplay_crosswalk_df = pair_id_df[['Disease','dz_name_display']].drop_duplicates()
         dz_name = dz_diplay_crosswalk_df[dz_diplay_crosswalk_df['dz_name_display']==disease_display]['Disease'].iloc[0]
-        """
-        Read relevant databases - change the directory in the server
-        """
+        ## Read the relevant file location
         file_path_location = '2024_reference_tables/THIRD_TAB/'
         medication_crosswalk = pd.read_csv(Path(__file__).parents[0] / file_path_location+'medication_crosswalk.csv').drop(columns=['Unnamed: 0'],axis=1)
         # Step 4: Load the dictionary from the file
