@@ -155,13 +155,13 @@ with tab3:
         dz_name = dz_diplay_crosswalk_df[dz_diplay_crosswalk_df['dz_name_display']==disease_display]['Disease'].iloc[0]
         ## Read the relevant file location
         file_path_location = '2024_reference_tables/THIRD_TAB/'
-        medication_crosswalk = pd.read_csv(Path(__file__).parents[0] / file_path_location+'medication_crosswalk.csv').drop(columns=['Unnamed: 0'],axis=1)
+        medication_crosswalk = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/THIRD_TAB/medication_crosswalk.csv').drop(columns=['Unnamed: 0'],axis=1)
         # Step 4: Load the dictionary from the file
-        pickle_file_path = Path(__file__).parents[0] / file_path_location+'disease_crosswalk.pkl'
+        pickle_file_path = Path(__file__).parents[0] / '2024_reference_tables/THIRD_TAB/disease_crosswalk.pkl'
         with open(pickle_file_path, 'rb') as f:
             loaded_dict = pickle.load(f)
         disease_crosswalk= pd.DataFrame.from_dict(loaded_dict)
-        disease_medication_pairs = pd.read_csv(Path(__file__).parents[0] / file_path_location+'disease_medication_pair.csv').drop(columns=['Unnamed: 0'],axis=1)
+        disease_medication_pairs = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/THIRD_TAB/disease_medication_pair.csv').drop(columns=['Unnamed: 0'],axis=1)
         
 
         med_id = medication_crosswalk[medication_crosswalk['Medication']==med_name]['DrugBank ID'].iloc[0]
