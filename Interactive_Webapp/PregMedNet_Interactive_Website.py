@@ -12,6 +12,8 @@ import pandas as pd
 import numpy as np
 
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches ## Added it (Add it to the github code later)
+import pickle ## Added it (Add it to the github code later)
 import seaborn as sns
 import networkx as nx
 
@@ -34,8 +36,7 @@ from bokeh.io import show
 from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn, Row
 
 from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, Interactive_Plot, DDI_Plot, make_node_list, make_edge_list
-
-
+from PregMedNet_Functions import MoA_node_color_df, MoA_legend_handles, MoA_make_node_list, MoA_make_edge_list, MoA_construct_graph, MoA_plot_subgraph, MoA_plot_shortest_paths, MoA_final_kg ## Add this to the Github
 
 st.set_page_config(layout='wide')
 
@@ -141,69 +142,55 @@ with tab3:
     st.subheader('Select the maternal medication and neonatal complications')
     file_path_pair =  Path(__file__).parents[0] / '2024_reference_tables/mechanism_dz_med_df.csv'
     pair_id_df = pd.read_csv(file_path_pair).drop(columns=['Unnamed: 0'])
-    disease = st.selectbox(
+    #kg = pd.read_csv('2024_reference_tables/kg.csv')
+    disease_display = st.selectbox(
                             '(1) Select the neonatal complication',
                             tuple(pair_id_df['dz_name_display'].unique()))
-    medication = st.selectbox(
+    med_name = st.selectbox(
         '(2) Select the maternal medication',
-        tuple(pair_id_df[pair_id_df['dz_name_display']==disease]['Medication'].unique())
+        tuple(pair_id_df[pair_id_df['dz_name_display']==disease_display]['Medication'].unique())
     )
     if st.button("Display the Mechanism of Action"):
-        sel_dz_id_list = list(pair_id_df[pair_id_df['dz_name_display']==disease]['dz_id'].unique())
-        sel_med_id = list(pair_id_df[pair_id_df['Medication']==medication]['med_id'].unique())[0]
+        dz_diplay_crosswalk_df = pair_id_df[['Disease','dz_name_display']].drop_duplicates()
+        dz_name = dz_diplay_crosswalk_df[dz_diplay_crosswalk_df['dz_name_display']==disease_display]['Disease'].iloc[0]
+        ## Read the relevant file location
+        file_path_location = '2024_reference_tables/THIRD_TAB/'
+        medication_crosswalk = pd.read_csv(Path(__file__).parents[0] / file_path_location+'medication_crosswalk.csv').drop(columns=['Unnamed: 0'],axis=1)
+        # Step 4: Load the dictionary from the file
+        pickle_file_path = Path(__file__).parents[0] / file_path_location+'disease_crosswalk.pkl'
+        with open(pickle_file_path, 'rb') as f:
+            loaded_dict = pickle.load(f)
+        disease_crosswalk= pd.DataFrame.from_dict(loaded_dict)
+        disease_medication_pairs = pd.read_csv(Path(__file__).parents[0] / file_path_location+'disease_medication_pair.csv').drop(columns=['Unnamed: 0'],axis=1)
         
-        # kg_path = Path(__file__).parents[0] / '2024_reference_tables/kg.csv'
-        # kg_path = '2024_reference_tables/kg.csv'
-        # kg_path ='https://github.com/yerakim824/PregMedNet/blob/main/Interactive_Webapp/2024_reference_tables/kg.csv'
-        kg_path = './2024_reference_tables/kg.csv'
-        kg = pd.read_csv(kg_path)
-        sel_relation = [
-                        'drug_protein',
-                        'protein_protein',
-                        'disease_protein',
-                        'bioprocess_protein','molfunc_protein','cellcomp_protein',
-                        'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
-                        ]
-        sel_sel_relation = [
-                        'protein_protein',
-                        'bioprocess_protein','molfunc_protein','cellcomp_protein',
-                        'bioprocess_bioprocess','molfunc_molfunc','cellcomp_cellcomp'
-                        ]
-        sel_kg = kg[kg['relation'].isin(sel_relation)].reset_index().drop(columns=['index','x_index','y_index'],axis=1) ## 4.3 million nodes (8.1M previouslydd)
-        sel_sel_kg = sel_kg[sel_kg['relation'].isin(sel_sel_relation)]
-        dz_kg = sel_kg[sel_kg['x_id'].isin(sel_dz_id_list)]
-        med_kg = sel_kg[sel_kg['x_id']==sel_med_id]
-        sel_sel_kg = pd.concat([sel_sel_kg,dz_kg,med_kg])
-        node_list = make_node_list(sel_sel_kg)
-        edge_list = make_edge_list(sel_sel_kg)
-        
+
+        med_id = medication_crosswalk[medication_crosswalk['Medication']==med_name]['DrugBank ID'].iloc[0]
+        num_dz_list = list(disease_crosswalk[disease_crosswalk['MarketScan']==dz_name]['node_id'].unique())
+        dz_id_list = num_dz_list.copy()
+        """
+        Data Loading in Progress...
+        """
+        final_kg_final = MoA_final_kg(dz_name, dz_id_list,med_id)
+        node_color_df = MoA_node_color_df()
+        node_list = MoA_make_node_list(final_kg_final,node_color_df)
+        edge_list = MoA_make_edge_list(final_kg_final)
+        ### Construct a Graph! ###
         G = nx.Graph()
         G.add_nodes_from(node_list)
         G.add_edges_from(edge_list)
+
+        T, shortest_paths_dict, num = MoA_construct_graph(G,med_id,dz_id_list,dz_name,med_name)
         
-        num = 0
-        count_nodes = []
-        for path in nx.all_shortest_paths(G, source=sel_med_id, target=sel_dz_id_list[0]):
-            print(path)
-            count_nodes+=path
-            num+=1
-
-        import matplotlib.patches as mpatches #matplotlib.patches.Circle
-        gene = mpatches.Patch(color='#16AEEF', label='gene/protein')
-        drug = mpatches.Patch(color='#946BE1', label='drug')
-        bio = mpatches.Patch(color='#FF781E', label='biological_process')
-        mole = mpatches.Patch(color='#FF9F21', label='molecular_function')
-        cell = mpatches.Patch(color='#F9CF57', label='cellular_component')
-        dz = mpatches.Patch(color='#5DC264', label='disease')
-
-        plt.figure(figsize=(20,14))
-        T= G.subgraph(count_nodes)
-        node_color = [i['node_color'] for i in dict(T.nodes).values()]
-        labels = nx.get_node_attributes(T, 'node_name') 
-        # plt.title(' and Ondansetron')
-        nx.draw(T,labels=labels,with_labels=True,font_size=7,edge_color='#DBDBDB',node_color=node_color,node_size=[T.degree(n)*100 for n in T.nodes()])
-        plt.legend(handles=[gene,drug,bio,mole,cell,dz])
-        show(p)
+        subgraph_plot = MoA_plot_subgraph(T,node_color_df,dz_name,med_name)
+        each_path_figs = MoA_plot_shortest_paths(T,shortest_paths_dict,med_id,dz_id_list)
+        col1, col2 = st.columns([1,1]) #1,4
+        with col1:
+            st.subheader('The Subgraph of All Shortest Paths')
+            st.pyplot(subgraph_plot)
+        with col2:
+            st.subheader('Each Shortest Path from the Subgraph of All Shortest Paths')
+            for fig in each_path_figs:
+                st.pyplot(fig)
 
         
 with tab4:
@@ -340,14 +327,3 @@ with tab4:
         st.write('You need to upload your file!')    
 
 
-
-
-# # aesthetics
-# p.toolbar.logo = None
-# p.toolbar_location = None
-# p.background_fill_alpha = 0
-# p.border_fill_alpha = 0
-# p.axis.axis_label_text_font_style = 'bold'
-# p.axis.axis_label_text_font_size = "16pt"
-# p.axis.major_label_text_font_size = "16pt"
-# p.legend.visible=False
