@@ -345,8 +345,8 @@ def make_node_list(sel_sel_kg):
     for key in node_dict.keys():
         each_node=(node_dict[key]['node_id'],
         {'node_name':node_dict[key]['node_name'],'node_type':node_dict[key]['node_type'],
-        'node_source':node_dict[key]['node_source'],'node_color':node_dict[key]['color'],
-        'node_type_merged':node_dict[key]['node_type_merged']})
+        'node_color':node_dict[key]['color'],
+        'node_type_merged':node_dict[key]['node_type_merged']}) #'node_source':node_dict[key]['node_source'],
         node_list.append(each_node)
     return node_list
 
@@ -525,8 +525,8 @@ def MoA_make_node_list(final_kg_final,node_color_df):
     for key in node_dict.keys():
         each_node=(node_dict[key]['node_id'],
         {'node_name':node_dict[key]['node_name'],'node_type':node_dict[key]['node_type'],
-        'node_source':node_dict[key]['node_source'],'node_color':node_dict[key]['color'],
-        'node_type_merged':node_dict[key]['node_type_merged']})
+        'node_color':node_dict[key]['color'],
+        'node_type_merged':node_dict[key]['node_type_merged']}) #'node_source':node_dict[key]['node_source'],
         node_list.append(each_node)
     
     return node_list
