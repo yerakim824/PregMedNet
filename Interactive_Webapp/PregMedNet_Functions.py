@@ -545,10 +545,10 @@ def MoA_make_edge_list(final_kg_final):
 
 def MoA_construct_graph(G,med_id,dz_id_list,dz_name,med_name):
     if len(dz_id_list)==2:
-        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[1], self_loops=True, copy=True)
+        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[1], self_loops=False, copy=True)
     elif len(dz_id_list)==3:
-        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[1], self_loops=True, copy=True)
-        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[2], self_loops=True, copy=True)
+        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[1], self_loops=False, copy=True)
+        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[2], self_loops=False, copy=True)
     else:
         pass
     
