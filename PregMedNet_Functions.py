@@ -61,7 +61,8 @@ def RAW_ODDS_RATIOS():
     return raw_edge_df_modi
 
 def ADJ_ODDS_RATIOS():
-    file_path_adj_or = Path(__file__).parents[0] / '2024_reference_tables/adj_edges.csv'
+    # file_path_adj_or = Path(__file__).parents[0] / '2024_reference_tables/adj_edges.csv' ## Previous results
+    file_path_adj_or = Path(__file__).parents[0] / '2024_reference_tables/CORRECTED_ADJ_ODDS_AUG2024.csv'
     adj_edge_df = pd.read_csv(file_path_adj_or).drop(columns=['Unnamed: 0'],axis=1)
     adj_edge_df_modi = adj_edge_df.copy()
     adj_edge_df_modi['color_clicked_modi'] = np.where(adj_edge_df_modi['color']=='#c9c9c9',adj_edge_df_modi['color_clicked'],'#0000ff')
@@ -345,8 +346,8 @@ def make_node_list(sel_sel_kg):
     for key in node_dict.keys():
         each_node=(node_dict[key]['node_id'],
         {'node_name':node_dict[key]['node_name'],'node_type':node_dict[key]['node_type'],
-        'node_source':node_dict[key]['node_source'],'node_color':node_dict[key]['color'],
-        'node_type_merged':node_dict[key]['node_type_merged']})
+        'node_color':node_dict[key]['color'],
+        'node_type_merged':node_dict[key]['node_type_merged']}) #'node_source':node_dict[key]['node_source'],
         node_list.append(each_node)
     return node_list
 
@@ -525,8 +526,8 @@ def MoA_make_node_list(final_kg_final,node_color_df):
     for key in node_dict.keys():
         each_node=(node_dict[key]['node_id'],
         {'node_name':node_dict[key]['node_name'],'node_type':node_dict[key]['node_type'],
-        'node_source':node_dict[key]['node_source'],'node_color':node_dict[key]['color'],
-        'node_type_merged':node_dict[key]['node_type_merged']})
+        'node_color':node_dict[key]['color'],
+        'node_type_merged':node_dict[key]['node_type_merged']}) #'node_source':node_dict[key]['node_source'],
         node_list.append(each_node)
     
     return node_list
@@ -545,10 +546,10 @@ def MoA_make_edge_list(final_kg_final):
 
 def MoA_construct_graph(G,med_id,dz_id_list,dz_name,med_name):
     if len(dz_id_list)==2:
-        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[1], self_loops=True, copy=True)
+        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[1], self_loops=False, copy=True)
     elif len(dz_id_list)==3:
-        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[1], self_loops=True, copy=True)
-        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[2], self_loops=True, copy=True)
+        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[1], self_loops=False, copy=True)
+        G = nx.contracted_nodes(G, dz_id_list[0], dz_id_list[2], self_loops=False, copy=True)
     else:
         pass
     
