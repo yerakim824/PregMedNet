@@ -6,20 +6,14 @@ from bokeh.plotting import figure
 from bokeh.models import Band, ColumnDataSource
 from bokeh.layouts import column, gridplot
 import base64
-<<<<<<< HEAD
-=======
 import os
->>>>>>> master
 
 import pandas as pd
 import numpy as np
 
 import matplotlib.pyplot as plt
-<<<<<<< HEAD
-=======
 import matplotlib.patches as mpatches ## Added it (Add it to the github code later)
 import pickle ## Added it (Add it to the github code later)
->>>>>>> master
 import seaborn as sns
 import networkx as nx
 
@@ -41,14 +35,8 @@ from bokeh import events
 from bokeh.io import show
 from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn, Row
 
-<<<<<<< HEAD
-from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, Interactive_Plot, DDI_Plot
-
-
-=======
 from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, Interactive_Plot, DDI_Plot, make_node_list, make_edge_list
 from PregMedNet_Functions import MoA_node_color_df, MoA_legend_handles, MoA_make_node_list, MoA_make_edge_list, MoA_construct_graph, MoA_plot_subgraph, MoA_plot_shortest_paths, MoA_final_kg ## Add this to the Github
->>>>>>> master
 
 st.set_page_config(layout='wide')
 
@@ -71,13 +59,9 @@ st.markdown('<div class="centered-text">PregMedNet is a tool for assessing the s
 
 st.markdown('#')
 
-<<<<<<< HEAD
-tab1, tab2, tab3, tab4 = st.tabs(["Maternal Medication Effects", "Drug-Drug Interactions", "Select & Calculate","Mechanism of Action"])
-=======
 tab1, tab2, tab3, tab4 = st.tabs(["Maternal Medication Effects", "Drug-Drug Interactions","Mechanism of Action", "Select & Calculate"])
 # tab1, tab2 = st.tabs(["Maternal Medication Effects", "Drug-Drug Interactions"])
 
->>>>>>> master
 
 with tab1:
     col1, col2 = st.columns([1.6, 2.4]) #1,4
@@ -97,36 +81,21 @@ with tab1:
         else:
             max_display=max_limit
 
-<<<<<<< HEAD
-        if st.button("Calculate"):
-=======
         if st.button("Display"):
->>>>>>> master
             if option=='Raw Odds Ratios':
                 dataframe = RAW_ODDS_RATIOS()
             else:
                 dataframe = ADJ_ODDS_RATIOS()
-<<<<<<< HEAD
-            dataframe['95% CI (LL)']=round(dataframe['95% CI (LL)'],4)
-            dataframe['95% CI (UL)']=round(dataframe['95% CI (UL)'],4)
-            dataframe['95% CI']=list(zip(dataframe['95% CI (LL)'],dataframe['95% CI (UL)']))
-            
-=======
 
             dataframe['95% CI (LL)']=round(dataframe['95% CI (LL)'],4)
             dataframe['95% CI (UL)']=round(dataframe['95% CI (UL)'],4)
             dataframe['95% CI']=list(zip(dataframe['95% CI (LL)'],dataframe['95% CI (UL)']))
->>>>>>> master
             if ~np.isnan(min_limit):
                 dataframe=dataframe[dataframe['odds ratio']>=min_limit]
             if ~np.isnan(max_limit):
                 dataframe=dataframe[dataframe['odds ratio']<=max_limit]
 
             st.markdown("""---""")
-<<<<<<< HEAD
-=======
-
->>>>>>> master
             st.subheader("Correlation List")
             st.caption('Total Number of significant correlations: {}'.format(dataframe.shape[0]))
             data = st.dataframe(dataframe[['Disease','Medication','odds ratio','95% CI','p-val']])#,'Count'
@@ -136,18 +105,10 @@ with tab1:
 
             with col2:
                 st.subheader("PregMedNet Network Graph")
-<<<<<<< HEAD
-                if st.button("Calculate"):
-                    st.write('Analysis Type: {} | P-Value limit: {} | Odds Ratio range: {} ~ {} | Total Number of Correlations: {}'.format(option,gg,min_display,max_display,dataframe.shape[0]))
-                    p = Interactive_Plot(dataframe)
-                    show(p)
-                    st.bokeh_chart(p, use_container_width=True)
-=======
                 st.write('Analysis Type: {} | P-Value limit: {} | Odds Ratio range: {} ~ {} | Total Number of Correlations: {}'.format(option,gg,min_display,max_display,dataframe.shape[0]))
                 p = Interactive_Plot(dataframe)
                 show(p)
                 st.bokeh_chart(p, use_container_width=True)
->>>>>>> master
         
 
 with tab2:
@@ -156,29 +117,6 @@ with tab2:
         st.subheader('Select Database for the Analysis')        
         option = st.selectbox('Select Dataset (Default: Both Cohorts)',     
                               ('Both Cohorts', 'Main Analysis Cohort', 'Validation Cohort'))        
-<<<<<<< HEAD
-
-        if option=='Both Cohorts':
-            file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_both_cohort_df.csv'
-            ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0'], axis=1)
-        elif option =='Main Analysis Cohort':
-            file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_discovery_cohort_df.csv'
-            ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0'], axis=1)
-        else:
-            file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_validation_cohort_df.csv'
-            ddi_edge = pd.read_csv(file_path_ddi_edge).drop(columns=['Unnamed: 0','Unnamed: 0.1'], axis=1)
-
-        file_path_ddi_node = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_node_df.csv'
-        ddi_node = pd.read_csv(file_path_ddi_node)
-        data = st.dataframe(ddi_edge[['Disease','Med1','Med2','b3','pval(b3)','OR_1','OR_2','OR_12']])
-    with col2:
-        st.subheader("Drug-Drug Interaction Graph")
-        p = DDI_Plot(ddi_node,ddi_edge)
-        show(p)
-        st.bokeh_chart(p, use_container_width=True)
-        
-with tab3:
-=======
         if st.button("Display DDI"):
             if option=='Both Cohorts':
                 file_path_ddi_edge = Path(__file__).parents[0] / '2024_reference_tables/drug-drug-interactions/ddi_edge_both_cohort_df.csv'
@@ -255,7 +193,6 @@ with tab3:
 
         
 with tab4:
->>>>>>> master
     st.markdown("""
     <style>
     .subtitle {
@@ -385,21 +322,7 @@ with tab4:
     'Select the list of covariates that will be used to adjust the odds ratios',
     confounder_list,
     ['GESTATIONAL_AGE','AGE_MOM'])
-<<<<<<< HEAD
-
-
-# aesthetics
-p.toolbar.logo = None
-p.toolbar_location = None
-p.background_fill_alpha = 0
-p.border_fill_alpha = 0
-p.axis.axis_label_text_font_style = 'bold'
-p.axis.axis_label_text_font_size = "16pt"
-p.axis.major_label_text_font_size = "16pt"
-p.legend.visible=False
-=======
     if st.button("Calculate"):
         st.write('You need to upload your file!')    
 
 
->>>>>>> master
