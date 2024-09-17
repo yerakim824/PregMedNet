@@ -61,8 +61,8 @@ def RAW_ODDS_RATIOS():
     return raw_edge_df_modi
 
 def ADJ_ODDS_RATIOS():
-    # file_path_adj_or = Path(__file__).parents[0] / '2024_reference_tables/adj_edges.csv' ## Previous Results
-    file_path_adj_or = Path(__file__).parents[0] / '2024_reference_tables/CORRECTED_ADJ_ODDS_AUG2024.csv'
+    file_path_adj_or = Path(__file__).parents[0] / '2024_reference_tables/adj_edges.csv' ## Previous Results
+    # file_path_adj_or = Path(__file__).parents[0] / '2024_reference_tables/CORRECTED_ADJ_ODDS_AUG2024.csv'
     adj_edge_df = pd.read_csv(file_path_adj_or).drop(columns=['Unnamed: 0'],axis=1)
     adj_edge_df_modi = adj_edge_df.copy()
     adj_edge_df_modi['color_clicked_modi'] = np.where(adj_edge_df_modi['color']=='#c9c9c9',adj_edge_df_modi['color_clicked'],'#0000ff')
