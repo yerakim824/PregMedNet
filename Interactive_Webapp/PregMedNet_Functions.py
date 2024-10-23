@@ -122,7 +122,7 @@ def Interactive_Plot(data):
         
     ##### Bokeh Network Graph #####
     #Choose a title!
-    output_notebook()
+    # output_notebook()
     title = 'PregMedNet Network Graph'
 
     #Establish which categories will appear when hovering over each node
