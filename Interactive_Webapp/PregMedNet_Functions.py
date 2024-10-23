@@ -130,7 +130,7 @@ def Interactive_Plot(data):
     node_hover_tool = [('Node','@index'),('Class','@class')]
 
     #Create a plot — set dimensions, toolbar, and title
-    plot = figure(tooltips = node_hover_tool,tools="pan,wheel_zoom,box_zoom,reset", toolbar_location="above",plot_width=1000,plot_height=1000) #,plot_width=1350,plot_height=1200
+    plot = figure(tooltips = node_hover_tool,tools="pan,wheel_zoom,box_zoom,reset", toolbar_location="above",width=1000,height=1000) #,plot_width=1350,plot_height=1200
     plot.add_tools(HoverTool(tooltips=node_hover_tool), TapTool(), BoxSelectTool())
 
     G=nx.Graph()
@@ -247,7 +247,7 @@ def DDI_Plot(ddi_node,ddi_edge):
     node_hover_tool = [('Node','@index'),('Class','@class')]
 
     #Create a plot — set dimensions, toolbar, and title
-    plot = figure(tooltips = node_hover_tool, tools="pan,wheel_zoom,box_zoom,reset", toolbar_location="above",plot_width=1000,plot_height=1000) #title=title, 
+    plot = figure(tooltips = node_hover_tool, tools="pan,wheel_zoom,box_zoom,reset", toolbar_location="above",width=1000,height=1000) #title=title, 
     
     plot.add_tools(HoverTool(tooltips=node_hover_tool), TapTool(), BoxSelectTool())
 
