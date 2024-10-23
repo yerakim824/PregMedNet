@@ -160,9 +160,9 @@ def Interactive_Plot(data):
     network_graph = from_networkx(G, nx.spring_layout,pos=fixed_positions, fixed = fixed_nodes,scale=10,center=(0,0))
 
     ######## Test #########
-    network_graph.node_renderer.glyph = Circle(size='node_size', fill_color='node_color')
-    network_graph.node_renderer.selection_glyph = Circle(size='node_size', fill_color='node_color')
-    network_graph.node_renderer.hover_glyph = Circle(size='node_size', fill_color='node_color')
+    network_graph.node_renderer.glyph = Circle(radius='node_size', fill_color='node_color')
+    network_graph.node_renderer.selection_glyph = Circle(radius='node_size', fill_color='node_color')
+    network_graph.node_renderer.hover_glyph = Circle(radius='node_size', fill_color='node_color')
 
     network_graph.edge_renderer.data_source.data["line_color"] = [G.get_edge_data(a,b)['color'] for a, b in G.edges()]
     network_graph.edge_renderer.glyph = MultiLine(line_color="edge_color", line_alpha=0.2)
@@ -275,9 +275,9 @@ def DDI_Plot(ddi_node,ddi_edge):
     ddi_graph = from_networkx(G, nx.spring_layout,pos=fixed_positions, fixed = fixed_nodes,scale=10,center=(0,0))
 
     ######## Test #########
-    ddi_graph.node_renderer.glyph = Circle(size='node_size', fill_color='node_color')
-    ddi_graph.node_renderer.selection_glyph = Circle(size='node_size', fill_color='node_color')
-    ddi_graph.node_renderer.hover_glyph = Circle(size='node_size', fill_color='node_color')
+    ddi_graph.node_renderer.glyph = Circle(radius='node_size', fill_color='node_color')
+    ddi_graph.node_renderer.selection_glyph = Circle(radius='node_size', fill_color='node_color')
+    ddi_graph.node_renderer.hover_glyph = Circle(radius='node_size', fill_color='node_color')
 
     ddi_graph.edge_renderer.data_source.data["line_color"] = [G.get_edge_data(a,b)['color'] for a, b in G.edges()]
     ddi_graph.edge_renderer.glyph = MultiLine(line_color="edge_color", line_alpha=0.2)
