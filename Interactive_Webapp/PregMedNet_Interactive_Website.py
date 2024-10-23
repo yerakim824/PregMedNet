@@ -59,8 +59,8 @@ st.markdown('<div class="centered-text">PregMedNet is a tool for assessing the s
 
 st.markdown('#')
 
-# tab1, tab2, tab3, tab4 = st.tabs(["Maternal Medication Effects", "Drug-Drug Interactions","Mechanism of Action", "Select & Calculate"])
 tab1, tab2, tab3 = st.tabs(["Maternal Medication Effects", "Drug-Drug Interactions","Mechanism of Action"])
+#### tab1, tab2, tab3, tab4 = st.tabs(["Maternal Medication Effects", "Drug-Drug Interactions","Mechanism of Action", "Select & Calculate"])
 
 
 with tab1:
