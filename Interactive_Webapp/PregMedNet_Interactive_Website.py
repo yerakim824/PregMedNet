@@ -101,8 +101,8 @@ with tab1:
             st.caption('Total Number of significant correlations: {}'.format(dataframe.shape[0]))
             data = st.dataframe(dataframe[['Disease','Medication','odds ratio','95% CI','p-val']])#,'Count'
             st.markdown("""---""")
-            st.subheader("Selected Correlations")
-            st.caption('Selected Correlations from the Network Graph')
+            # st.subheader("Selected Correlations")
+            # st.caption('Selected Correlations from the Network Graph')
 
             with col2:
                 st.subheader("PregMedNet Network Graph")
@@ -110,6 +110,8 @@ with tab1:
                 p = Interactive_Plot(dataframe)
                 show(p)
                 st.bokeh_chart(p, use_container_width=True)
+                st.subheader("Selected Correlations")
+                st.caption('Selected Correlations from the Network Graph')
         
 
 with tab2:
