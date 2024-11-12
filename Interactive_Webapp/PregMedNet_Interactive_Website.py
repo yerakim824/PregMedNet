@@ -108,7 +108,7 @@ with tab1:
             st.markdown("""---""")
             st.subheader("All Associations")
             st.caption('All Associations including statistically non-significant')
-            data2 = st.dataframe(all_or[['Disease','Medication','odds ratio','95% CI','p-val','Count']])
+            data2 = st.dataframe(all_or[['Disease','Medication','odds ratio','95% CI','p-val']]) #,'Count'
 
             with col2:
                 st.subheader("PregMedNet Network Graph")
