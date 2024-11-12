@@ -35,7 +35,7 @@ from bokeh import events
 from bokeh.io import show
 from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn, Row
 
-from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, Interactive_Plot, DDI_Plot, make_node_list, make_edge_list
+from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, RAW_ODDS_ALL, ADJ_ODDS_ALL, Interactive_Plot, DDI_Plot, make_node_list, make_edge_list
 from PregMedNet_Functions import MoA_node_color_df, MoA_legend_handles, MoA_make_node_list, MoA_make_edge_list, MoA_construct_graph, MoA_plot_subgraph, MoA_plot_shortest_paths, MoA_final_kg ## Add this to the Github
 
 st.set_page_config(layout='wide')
@@ -84,12 +84,17 @@ with tab1:
         if st.button("Display"):
             if option=='Raw Odds Ratios':
                 dataframe = RAW_ODDS_RATIOS()
+                all_or = RAW_ODDS_ALL()
             else:
                 dataframe = ADJ_ODDS_RATIOS()
+                all_or = ADJ_ODDS_ALL()
 
             dataframe['95% CI (LL)']=round(dataframe['95% CI (LL)'],4)
             dataframe['95% CI (UL)']=round(dataframe['95% CI (UL)'],4)
             dataframe['95% CI']=list(zip(dataframe['95% CI (LL)'],dataframe['95% CI (UL)']))
+            all_or['95% CI (LL)']=round(all_or['95% CI (LL)'],4)
+            all_or['95% CI (UL)']=round(all_or['95% CI (UL)'],4)
+            all_or['95% CI']=list(zip(all_or['95% CI (LL)'],all_or['95% CI (UL)']))
             if ~np.isnan(min_limit):
                 dataframe=dataframe[dataframe['odds ratio']>=min_limit]
             if ~np.isnan(max_limit):
@@ -97,13 +102,13 @@ with tab1:
 
             st.markdown("""---""")
 
-            st.subheader("Correlation List")
-            st.caption('Total Number of significant correlations: {}'.format(dataframe.shape[0]))
+            st.subheader("Significant Assication List")
+            st.caption('Total Number of significant Associations: {}'.format(dataframe.shape[0]))
             data = st.dataframe(dataframe[['Disease','Medication','odds ratio','95% CI','p-val']])#,'Count'
             st.markdown("""---""")
-            # st.subheader("Selected Correlations")
-            # st.caption('Selected Correlations from the Network Graph')
-            ## test
+            st.subheader("All Associations")
+            st.caption('All Associations including statistically non-significant')
+            data2 = st.dataframe(all_or[['Disease','Medication','odds ratio','95% CI','p-val','Count']])
 
             with col2:
                 st.subheader("PregMedNet Network Graph")

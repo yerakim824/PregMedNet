@@ -70,6 +70,16 @@ def ADJ_ODDS_RATIOS():
     adj_edge_df_modi = adj_edge_df_modi.drop(columns=['color_clicked']).rename(columns={'color_clicked_modi':'color_clicked'})
     return adj_edge_df_modi
 
+def RAW_ODDS_ALL():
+    file_path_raw_or = Path(__file__).parents[0] / '2024_reference_tables/raw_or_all_nov2024.csv'
+    raw_or_all = pd.read_csv(file_path_raw_or).drop(columns=['Unnamed: 0'],axis=1)
+    return raw_or_all
+
+def ADJ_ODDS_ALL():
+    file_path_raw_or = Path(__file__).parents[0] / '2024_reference_tables/adj_or_all_nov2024.csv'
+    adj_or_all = pd.read_csv(file_path_raw_or).drop(columns=['Unnamed: 0'],axis=1)
+    return adj_or_all
+
 
 def Interactive_Plot(data):
     file_path_nodes = Path(__file__).parents[0] / '2024_reference_tables/node_tsne.csv'
