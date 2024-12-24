@@ -1,12 +1,12 @@
 # PregMedNet
 An implementation of PregMedNet from our publication: Kim et al. "PregMedNet: Multifaceted Maternal Medication Impacts on Neonatal Complications"
 
-Full content: [cite]
+Full content: cite
 Website: https://pregmednet.streamlit.app/
 
 ## Overview
 
-## Data Availability
+## Data
 The Merative™ Marketscan® Commercial Database is available to purchase by federal, nonprofit, academic, pharmaceutical, and other researchers. Use of the data is contingent on completing a data use agreement and purchasing the data needed to support the study. More information about licensing the Merative™ Marketscan® Commercial Database is available at: https://www.merative.com/documents/brief/marketscan-explainer-general. 
 
 ## Requirements
@@ -18,4 +18,7 @@ pip install -r requirements.txt
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgements
+## Contact
+Please contact Yeasul Kim (ykim824@stanford.edu) with any questions.
+
+## Citation
