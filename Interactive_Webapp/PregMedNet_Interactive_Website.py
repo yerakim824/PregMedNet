@@ -36,7 +36,7 @@ from bokeh.io import show
 from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn, Row
 
 from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, RAW_ODDS_ALL, ADJ_ODDS_ALL, Interactive_Plot, DDI_Plot, make_node_list, make_edge_list
-from PregMedNet_Functions import MoA_node_color_df, MoA_legend_handles, MoA_make_node_list, MoA_make_edge_list, MoA_construct_graph, MoA_plot_subgraph, MoA_plot_shortest_paths, MoA_final_kg, MoA_final_protein_kg
+from PregMedNet_Functions import MoA_node_color_df, MoA_legend_handles, MoA_make_node_list, MoA_make_edge_list, MoA_construct_graph, MoA_plot_subgraph, MoA_plot_shortest_paths, MoA_final_kg#, MoA_final_protein_kg
 
 st.set_page_config(layout='wide')
 
