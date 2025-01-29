@@ -36,7 +36,7 @@ from bokeh.io import show
 from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn, Row
 
 from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, RAW_ODDS_ALL, ADJ_ODDS_ALL, Interactive_Plot, DDI_Plot, make_node_list, make_edge_list
-from PregMedNet_Functions import MoA_node_color_df, MoA_legend_handles, MoA_make_node_list, MoA_make_edge_list, MoA_construct_graph, MoA_plot_subgraph, MoA_plot_shortest_paths, MoA_final_kg ## Add this to the Github
+from PregMedNet_Functions import MoA_node_color_df, MoA_legend_handles, MoA_make_node_list, MoA_make_edge_list, MoA_construct_graph, MoA_plot_subgraph, MoA_plot_shortest_paths, MoA_final_kg, MoA_final_protein_kg
 
 st.set_page_config(layout='wide')
 
@@ -158,6 +158,12 @@ with tab3:
         '(2) Select the maternal medication',
         tuple(pair_id_df[pair_id_df['dz_name_display']==disease_display]['Medication'].unique())
     )
+    
+    mechanism = st.selectbox(
+        '(3) Select the mechanism for the analysis',
+        tuple(['With Only Proteins','With All Biological Entities'])
+    )
+    
     if st.button("Display the Mechanism of Action"):
         dz_diplay_crosswalk_df = pair_id_df[['Disease','dz_name_display']].drop_duplicates()
         dz_name = dz_diplay_crosswalk_df[dz_diplay_crosswalk_df['dz_name_display']==disease_display]['Disease'].iloc[0]
@@ -178,7 +184,10 @@ with tab3:
         """
         Data Loading in Progress...
         """
-        final_kg_final = MoA_final_kg(dz_name, dz_id_list,med_id)
+        if mechanism == 'With Only Proteins':
+            final_kg_final = MoA_final_protein_kg(dz_name, dz_id_list,med_id)
+        else:
+            final_kg_final = MoA_final_kg(dz_name, dz_id_list,med_id)
         node_color_df = MoA_node_color_df()
         node_list = MoA_make_node_list(final_kg_final,node_color_df)
         edge_list = MoA_make_edge_list(final_kg_final)
@@ -186,19 +195,22 @@ with tab3:
         G = nx.Graph()
         G.add_nodes_from(node_list)
         G.add_edges_from(edge_list)
-
-        T, shortest_paths_dict, num = MoA_construct_graph(G,med_id,dz_id_list,dz_name,med_name)
         
-        subgraph_plot = MoA_plot_subgraph(T,node_color_df,dz_name,med_name)
-        each_path_figs = MoA_plot_shortest_paths(T,shortest_paths_dict,med_id,dz_id_list)
-        col1, col2 = st.columns([1,1]) #1,4
-        with col1:
-            st.subheader('The Subgraph of All Shortest Paths')
-            st.pyplot(subgraph_plot)
-        with col2:
-            st.subheader('Each Shortest Path from the Subgraph of All Shortest Paths')
-            for fig in each_path_figs:
-                st.pyplot(fig)
+        try:
+            T, shortest_paths_dict, num = MoA_construct_graph(G,med_id,dz_id_list,dz_name,med_name)
+            
+            subgraph_plot = MoA_plot_subgraph(T,node_color_df,dz_name,med_name)
+            each_path_figs = MoA_plot_shortest_paths(T,shortest_paths_dict,med_id,dz_id_list)
+            col1, col2 = st.columns([1,1]) #1,4
+            with col1:
+                st.subheader('The Subgraph of All Shortest Paths')
+                st.pyplot(subgraph_plot)
+            with col2:
+                st.subheader('Each Shortest Path from the Subgraph of All Shortest Paths')
+                for fig in each_path_figs:
+                    st.pyplot(fig)
+        except:
+            st.write('No Shortest Path Found!')
 
         
 # with tab4:

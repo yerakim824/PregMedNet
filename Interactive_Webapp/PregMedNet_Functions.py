@@ -466,6 +466,80 @@ def MoA_final_kg(dz_name, dz_id_list, med_id):
     return final_kg
 
 
+def MoA_final_protein_kg(dz_name, dz_id_list, med_id):
+    kg = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/kg.csv')
+    
+    sel_relation = ['protein_protein']
+    
+    if dz_name in ['BPD_OLD_Baby','Jaundice_Baby']:
+        disease_kg = kg[(kg['relation'] == 'disease_protein') & (kg['x_id'].isin(dz_id_list))]
+        disease_kg_y = kg[(kg['relation'] == 'disease_protein') & (kg['y_id'].isin(dz_id_list))]
+    
+    elif dz_name in ['LGA_Baby', 'Neonatal_Death_Baby', 'Sepsis_Baby', 'SGA_Baby', 'IVH_Baby']:
+        disease_kg = kg[(kg['x_type'] == 'effect/phenotype') & (kg['x_id'].isin(dz_id_list))]
+        disease_kg_y = kg[(kg['y_type'] == 'effect/phenotype') & (kg['y_id'].isin(dz_id_list))]
+    
+    elif dz_name == 'NAS_Baby':
+        disease_kg = kg[(kg['relation'] == 'disease_protein') & (kg['x_id'].isin(dz_id_list))]
+        disease_kg_y = kg[(kg['relation'] == 'disease_protein') & (kg['y_id'].isin(dz_id_list))]
+    
+    elif dz_name == 'Hypoglycemia_Baby':
+        disease_kg = kg[(kg['relation'] == 'disease_protein') & (kg['x_id'].isin(dz_id_list))]
+        disease_kg_y = kg[(kg['relation'] == 'disease_protein') & (kg['y_id'].isin(dz_id_list))]
+    
+    elif dz_name == 'RDS_Baby':
+        disease_kg = kg[(kg['x_type'] == 'disease') & (kg['x_id'].isin(dz_id_list))]
+        disease_kg_y = kg[(kg['x_type'] == 'disease') & (kg['y_id'].isin(dz_id_list))]
+    
+    elif dz_name == 'ROP_Baby':
+        rop_effect_kg = kg[(kg['x_type'] == 'effect/phenotype') & (kg['x_id'].isin(dz_id_list))]
+        rop_effect_kg_y = kg[(kg['y_type'] == 'effect/phenotype') & (kg['y_id'].isin(dz_id_list))]
+        rop_disease_kg = kg[(kg['x_type'] == 'disease') & (kg['x_id'].isin(dz_id_list))]
+        rop_disease_kg_y = kg[(kg['y_type'] == 'disease') & (kg['y_id'].isin(dz_id_list))]
+        disease_kg = pd.concat([rop_effect_kg, rop_disease_kg])
+        disease_kg_y = pd.concat([rop_effect_kg_y, rop_disease_kg_y])
+    
+    elif dz_name == 'UTI_Baby':
+        disease_kg = kg[(kg['x_type'] == 'disease') & (kg['x_id'].isin(dz_id_list))]
+        disease_kg_y = kg[(kg['x_type'] == 'disease') & (kg['y_id'].isin(dz_id_list))]
+    
+    elif dz_name in ['Anemia_All_Baby', 'Anemia_AOP_Baby']:
+        disease_kg = kg[(kg['x_type'] == 'disease') & (kg['x_id'].isin(dz_id_list))]
+        disease_kg_y = kg[(kg['y_type'] == 'disease') & (kg['y_id'].isin(dz_id_list))]
+    
+    else:
+        return pd.DataFrame()  # Return an empty DataFrame if no conditions match
+
+    sel_kg = kg[kg['relation'].isin(sel_relation)]
+    drug_kg = kg[(kg['relation'] == 'drug_protein') & (kg['x_id'] == med_id)]
+    drug_kg_y = kg[(kg['relation'] == 'drug_protein') & (kg['y_id'] == med_id)]
+    
+    final_kg = pd.concat([sel_kg, disease_kg, disease_kg_y, drug_kg, drug_kg_y])
+
+    drop_col_dict = {
+        'NAS_Baby': ['PRKACA'],
+        'Hypoglycemia_Baby': ['ELF2', 'Foster-Kennedy syndrome', 'angiotensin-mediated vasoconstriction involved in regulation of systemic arterial blood pressure', 'sternocostal joint'],
+        'BPD_OLD_Baby': [],
+        'Jaundice_Baby': ['SLC22A5', 'catecholamine metabolic process'],
+        'LGA_Baby': ['CTSS', 'kleptomania', 'outer dense fiber'],
+        'Neonatal_Death_Baby': ['KIR3DL1', 'ovarian seromucinous tumor'],
+        'RDS_Baby': ['NR1H4', 'Polydactyly affecting the 4th finger'],
+        'Sepsis_Baby': [],
+        'SGA_Baby': ['voltage-gated sodium channel complex'],
+        'ROP_Baby': ['defense response'],
+        'UTI_Baby': ['DNTT'],
+        'IVH_Baby': ["isoflavone 4'-O-methyltransferase activity"],
+        'Seizures_Baby': [],
+        'Anemia_All_Baby': ['CMKLR1'],
+        'Anemia_AOP_Baby': ['Wrist flexion contracture']
+    }
+    
+    drop_names = drop_col_dict.get(dz_name, [])
+    final_kg = final_kg[~final_kg['x_name'].isin(drop_names)]
+    final_kg = final_kg[~final_kg['y_name'].isin(drop_names)]
+    
+    return final_kg
+
 
 def MoA_node_color_df():
     node_color_dict= {'node_type': {0: 'gene/protein',
