@@ -185,7 +185,7 @@ with tab3:
         """
         Data Loading in Progress...
         """
-        if mechanism == 'With Only Proteins':
+        if mechanism == 'With Onlsy Proteins':
             final_kg_final = MoA_final_protein_kg(dz_name, dz_id_list,med_id)
         else:
             final_kg_final = MoA_final_kg(dz_name, dz_id_list,med_id)
