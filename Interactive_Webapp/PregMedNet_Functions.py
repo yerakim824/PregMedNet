@@ -469,8 +469,6 @@ def MoA_final_kg(dz_name, dz_id_list, med_id):
 def MoA_final_protein_kg(dz_name, dz_id_list, med_id):
     kg = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/kg.csv')
     
-    sel_relation = ['protein_protein']
-    
     if dz_name in ['BPD_OLD_Baby','Jaundice_Baby']:
         disease_kg = kg[(kg['relation'] == 'disease_protein') & (kg['x_id'].isin(dz_id_list))]
         disease_kg_y = kg[(kg['relation'] == 'disease_protein') & (kg['y_id'].isin(dz_id_list))]
@@ -510,6 +508,7 @@ def MoA_final_protein_kg(dz_name, dz_id_list, med_id):
     else:
         return pd.DataFrame()  # Return an empty DataFrame if no conditions match
 
+    sel_relation = ['protein_protein']
     sel_kg = kg[kg['relation'].isin(sel_relation)]
     drug_kg = kg[(kg['relation'] == 'drug_protein') & (kg['x_id'] == med_id)]
     drug_kg_y = kg[(kg['relation'] == 'drug_protein') & (kg['y_id'] == med_id)]
