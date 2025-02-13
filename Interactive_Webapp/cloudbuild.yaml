@@ -1,8 +1,8 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
     dir: 'Interactive_Webapp'
-    args: ['build', '-t', 'gcr.io/my-streamlit-app-ykim/github.com/yerakim824/pregmednet:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'gcr.io/my-streamlit-app-ykim/github.com/yerakim824/PregMedNet:$COMMIT_SHA', '.']
 options:
   logging: CLOUD_LOGGING_ONLY
 images:
-  - 'gcr.io/my-streamlit-app-ykim/github.com/yerakim824/pregmednet:$COMMIT_SHA'
+  - 'gcr.io/my-streamlit-app-ykim/github.com/yerakim824/PregMedNet:$COMMIT_SHA'
