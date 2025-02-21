@@ -2,6 +2,7 @@
 An implementation of **PregMedNet** from our publication: **Kim et al.** *"PregMedNet: Multifaceted Maternal Medication Impacts on Neonatal Complications"*
 
 Website: https://pregmednet.com/
+MedRxiv doi: https://doi.org/10.1101/2025.02.13.25322242
 
 ## Overview
 
