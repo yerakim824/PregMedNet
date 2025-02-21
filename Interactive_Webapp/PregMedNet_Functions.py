@@ -30,6 +30,9 @@ from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn
 from pathlib import Path
 import os
 
+from google.cloud import storage
+import io
+
 final_color_dict = {'Disease': '#696969',
  'Anti-Infective Agents': '#e43972',
  'Immunosuppressants': '#a6bbff',
@@ -372,10 +375,23 @@ def make_edge_list(sel_sel_kg):
     return edge_list
     
 
+def load_data_from_gcs(bucket_name, file_name):
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(file_name)
+
+    print(f"Downloading {file_name} from {bucket_name}...")
+    data = blob.download_as_bytes()
+
+    return pd.read_csv(io.BytesIO(data))
 
 def MoA_final_kg(dz_name, dz_id_list, med_id):
-    kg = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/kg.csv')
-    
+    bucket_name = "my-streamlit-app-ykim_cloudbuild"  # 🔹 Change this to your bucket name
+    file_name = "kg.csv"
+
+    kg = load_data_from_gcs(bucket_name, file_name)
+    print("Successfully loaded kg.csv from GCS!")
+        
     if dz_name in ['BPD_OLD_Baby','Jaundice_Baby']:
         sel_relation = ['protein_protein', 'bioprocess_protein', 'molfunc_protein', 'cellcomp_protein', 
                         'bioprocess_bioprocess', 'molfunc_molfunc', 'cellcomp_cellcomp']
@@ -467,8 +483,11 @@ def MoA_final_kg(dz_name, dz_id_list, med_id):
 
 
 def MoA_final_protein_kg(dz_name, dz_id_list, med_id):
-    kg = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/kg.csv')
-    print("Successfully loaded kg.csv!")
+    bucket_name = "my-streamlit-app-ykim_cloudbuild"  # 🔹 Change this to your bucket name
+    file_name = "kg.csv"
+
+    kg = load_data_from_gcs(bucket_name, file_name)
+    print("Successfully loaded kg.csv from GCS!")
     
     if dz_name in ['BPD_OLD_Baby','Jaundice_Baby']:
         disease_kg = kg[(kg['relation'] == 'disease_protein') & (kg['x_id'].isin(dz_id_list))]
