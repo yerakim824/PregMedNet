@@ -39,9 +39,9 @@ from PregMedNet_Functions import RAW_ODDS_RATIOS, ADJ_ODDS_RATIOS, RAW_ODDS_ALL,
 from PregMedNet_Functions import MoA_node_color_df, MoA_legend_handles, MoA_make_node_list, MoA_make_edge_list, MoA_construct_graph, MoA_plot_subgraph, MoA_plot_shortest_paths, MoA_final_kg
 from PregMedNet_Functions import MoA_final_protein_kg
 
-st.set_page_config(layout='wide')
-
-
+st.set_page_config(page_title="PregMedNet",
+                    page_icon="💊",
+                    layout="wide")
 
 st.markdown("""
     <style>
