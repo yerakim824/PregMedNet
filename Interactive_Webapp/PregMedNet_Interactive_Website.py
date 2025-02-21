@@ -183,7 +183,7 @@ with tab3:
         num_dz_list = list(disease_crosswalk[disease_crosswalk['MarketScan']==dz_name]['node_id'].unique())
         dz_id_list = num_dz_list.copy()
         """
-        Data Loading in Progress... This takes about 2.5 minutes...
+        Data Loading in Progress... This takes about 1 minute...
         """
         if mechanism == 'With Onlsy Proteins':
             final_kg_final = MoA_final_protein_kg(dz_name, dz_id_list,med_id)
