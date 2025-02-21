@@ -385,18 +385,21 @@ def load_data_from_gcs(bucket_name, file_name):
     print(f"Downloading {file_name} from {bucket_name}...")
     data = blob.download_as_bytes()
 
-    return pd.read_csv(io.BytesIO(data))
+    # return pd.read_csv(io.BytesIO(data))
+    return pd.read_parquet(io.BytesIO(data))  # Load Parquet
+
 
 def MoA_final_kg(dz_name, dz_id_list, med_id):
     bucket_name = "my-streamlit-app-ykim_cloudbuild"  # 🔹 Change this to your bucket name
-    file_name = "kg.csv"
+    file_name = "kg.parquet"
 
     try:
         kg = load_data_from_gcs(bucket_name, file_name)
-        st.markdown("Successfully loaded kg.csv from GCS!")
+        st.markdown("Successfully loaded kg.parquet from GCS!")
     except:
-        kg = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/kg.csv')
-        st.markdown("Successfully loaded kg.csv!")
+        # kg = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/kg.csv') pd.read_parquet('kg.parquet')
+        kg = pd.read_parquet(Path(__file__).parents[0] / '2024_reference_tables/kg.parquet')
+        st.markdown("Successfully loaded kg.parquet!")
         
     if dz_name in ['BPD_OLD_Baby','Jaundice_Baby']:
         sel_relation = ['protein_protein', 'bioprocess_protein', 'molfunc_protein', 'cellcomp_protein', 
@@ -490,15 +493,16 @@ def MoA_final_kg(dz_name, dz_id_list, med_id):
 
 def MoA_final_protein_kg(dz_name, dz_id_list, med_id):
     bucket_name = "my-streamlit-app-ykim_cloudbuild"  # 🔹 Change this to your bucket name
-    file_name = "kg.csv"
+    file_name = "kg.parquet"
 
     try:
         kg = load_data_from_gcs(bucket_name, file_name)
-        st.markdown('Successfully loaded kg.csv from GCS!')
+        st.markdown('Successfully loaded kg.parquet from GCS!')
         
     except:
-        kg = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/kg.csv')
-        st.markdown("Successfully loaded kg.csv!")
+        # kg = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/kg.csv')
+        kg = pd.read_parquet(Path(__file__).parents[0] / '2024_reference_tables/kg.parquet')
+        st.markdown("Successfully loaded kg.parquet!")
     
     if dz_name in ['BPD_OLD_Baby','Jaundice_Baby']:
         disease_kg = kg[(kg['relation'] == 'disease_protein') & (kg['x_id'].isin(dz_id_list))]
