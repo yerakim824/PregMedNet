@@ -1,8 +1,16 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
     dir: 'Interactive_Webapp'
-    args: ['build', '-t', 'gcr.io/my-streamlit-app-ykim/github.com/yerakim824/PregMedNet:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'gcr.io/my-streamlit-app-ykim/pregmednet:$COMMIT_SHA', '.']
+    
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/my-streamlit-app-ykim/pregmednet:$COMMIT_SHA']
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['run', 'deploy', 'pregmednet', '--image', 'gcr.io/my-streamlit-app-ykim/pregmednet:$COMMIT_SHA', '--region', 'us-west1', '--platform', 'managed']
+
 options:
   logging: CLOUD_LOGGING_ONLY
+
 images:
-  - 'gcr.io/my-streamlit-app-ykim/github.com/yerakim824/PregMedNet:$COMMIT_SHA'
+  - 'gcr.io/my-streamlit-app-ykim/pregmednet:$COMMIT_SHA'
