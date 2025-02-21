@@ -57,7 +57,6 @@ st.markdown("""
     """, unsafe_allow_html=True)
 st.markdown('<div class="title">PregMedNet</div>', unsafe_allow_html=True)
 st.markdown('<div class="centered-text">PregMedNet is a tool for assessing the safety of maternal medications during pregnancy and their impact on neonatal outcomes. Discover more details in our <a href="https://www.medrxiv.org/content/10.1101/2025.02.13.25322242v1" target="_blank"> paper</a>! ✨</div>', unsafe_allow_html=True)
-st.markdown('Last Updated: Feb 2025')
 
 st.markdown('#')
 
