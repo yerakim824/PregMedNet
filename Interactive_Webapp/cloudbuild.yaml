@@ -10,7 +10,6 @@ steps:
     args: ['run', 'deploy', 'pregmednet', '--image', 'gcr.io/my-streamlit-app-ykim/pregmednet:$COMMIT_SHA', '--region', 'us-west1', '--platform', 'managed']
 
 options:
-  region: 'us-west1'  # Set Cloud Build to run in us-west1
   logging: CLOUD_LOGGING_ONLY
   machineType: 'E2_HIGHCPU_8'  # Optional: Use a more powerful machine if needed
 
