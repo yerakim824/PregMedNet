@@ -168,8 +168,7 @@ with tab3:
     if st.button("Display the Mechanism of Action"):
         dz_diplay_crosswalk_df = pair_id_df[['Disease','dz_name_display']].drop_duplicates()
         dz_name = dz_diplay_crosswalk_df[dz_diplay_crosswalk_df['dz_name_display']==disease_display]['Disease'].iloc[0]
-        ## Read the relevant file location
-        file_path_location = '2024_reference_tables/THIRD_TAB/'
+
         medication_crosswalk = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/THIRD_TAB/medication_crosswalk.csv').drop(columns=['Unnamed: 0'],axis=1)
         # Step 4: Load the dictionary from the file
         pickle_file_path = Path(__file__).parents[0] / '2024_reference_tables/THIRD_TAB/disease_crosswalk.pkl'
@@ -185,7 +184,7 @@ with tab3:
         """
         Data Loading in Progress... This takes about 1 minute...
         """
-        if mechanism == 'With Onlsy Proteins':
+        if mechanism == 'With Only Proteins':
             final_kg_final = MoA_final_protein_kg(dz_name, dz_id_list,med_id)
         else:
             final_kg_final = MoA_final_kg(dz_name, dz_id_list,med_id)
