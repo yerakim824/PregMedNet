@@ -1,0 +1,25 @@
+,Disease,dz_name_display
+0,RDS_Baby,Newborn Respiratory Distress Syndrome (RDS)
+1,Jaundice_Baby,Neonatal Jaundice
+2,BPD_OLD_Baby,Bronchopulmonary Dysplasia (BPD)
+3,Other_Resp_Dis_Baby,Other Respiratory Disorder
+4,Kernicterus_Baby,Kernicterus
+5,TTN_Baby,Transient Tachypnea of the Newborn (TTN)
+6,Sepsis_Baby,Neonatal Sepsis
+7,IVH_Baby,Intraventricular Hemorrhage (IVH)
+8,GALD_Baby,Gestational Alloimmune Liver Disease (GALD)
+9,Seizures_Baby,Neonatal Seizure
+10,NEC_Baby,Necrotizing Enterocolitis (NEC)
+11,PPHN_Baby,Persistent Pulmonary Hypertension of the Newborn (PPHN)
+12,Hypoglycemia_Baby,Neonatal Hypoglycemia
+13,NAS_Baby,Neonatal Abstinence Syndrome (NAS)
+14,Arrhythmia_Baby,Neonatal Arrhythmia
+15,Pneumonia_Baby,Neonatal Pneumonia
+16,UTI_Baby,neonatal urinary tract infection (UTI)
+17,SGA_Baby,Small for Gestational Age (SGA)
+18,LGA_Baby,Large for Gestational Age (LGA)
+19,Postmaturity_Baby,Postmaturity Syndrome
+20,Neonatal_Death_Baby,Neonatal Death
+21,ROP_Baby,Retinopathy of Prematurity (ROP)
+22,Anemia_AOP_Baby,Anemia of Prematurity (AOP)
+23,Anemia_All_Baby,Neonatal Anemia

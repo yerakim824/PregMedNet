@@ -152,10 +152,6 @@ def Interactive_Plot(data):
     G.add_nodes_from(node_list)
     G.add_edges_from(edge_list)
 
-
-    # edge_weight = [i['weight_modi'] for i in dict(G.edges).values()]
-    # edge_color = [i['color'] for i in dict(G.edges).values()]
-
     fixed_nodes = node_dict.keys()
     fixed_positions = nx.get_node_attributes(G,'pos')
     node_sizes = nx.get_node_attributes(G,'size')
@@ -271,7 +267,7 @@ def DDI_Plot(ddi_node,ddi_edge):
     G.add_edges_from(edge_list)
 
 
-    fixed_nodes = node_dict.keys()
+    fixed_nodes = G.nodes()
     fixed_positions = nx.get_node_attributes(G,'pos')
     node_sizes = nx.get_node_attributes(G,'size')
     node_colors = nx.get_node_attributes(G,'color')

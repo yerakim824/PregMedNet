@@ -117,8 +117,8 @@ with tab1:
                 p = Interactive_Plot(dataframe)
                 show(p)
                 st.bokeh_chart(p, use_container_width=True)
-                st.subheader("Selected Correlations")
-                st.caption('Selected Correlations from the Network Graph')
+                # st.subheader("Selected Correlations")
+                # st.caption('Selected Correlations from the Network Graph')
         
 
 with tab2:
@@ -177,24 +177,30 @@ with tab3:
         disease_crosswalk= pd.DataFrame.from_dict(loaded_dict)
         disease_medication_pairs = pd.read_csv(Path(__file__).parents[0] / '2024_reference_tables/THIRD_TAB/disease_medication_pair.csv').drop(columns=['Unnamed: 0'],axis=1)
         
+        try:
+            med_id = medication_crosswalk[medication_crosswalk['Medication']==med_name]['DrugBank ID'].iloc[0]
+            num_dz_list = list(disease_crosswalk[disease_crosswalk['MarketScan']==dz_name]['node_id'].unique())
+            dz_id_list = num_dz_list.copy()
+            """
+            Data Loading in Progress... This takes about 1 minute...
+            """
+        except:
+            st.subheader('Medication Not Found in kg.parquet!')
 
-        med_id = medication_crosswalk[medication_crosswalk['Medication']==med_name]['DrugBank ID'].iloc[0]
-        num_dz_list = list(disease_crosswalk[disease_crosswalk['MarketScan']==dz_name]['node_id'].unique())
-        dz_id_list = num_dz_list.copy()
-        """
-        Data Loading in Progress... This takes about 1 minute...
-        """
-        if mechanism == 'With Only Proteins':
-            final_kg_final = MoA_final_protein_kg(dz_name, dz_id_list,med_id)
-        else:
-            final_kg_final = MoA_final_kg(dz_name, dz_id_list,med_id)
-        node_color_df = MoA_node_color_df()
-        node_list = MoA_make_node_list(final_kg_final,node_color_df)
-        edge_list = MoA_make_edge_list(final_kg_final)
-        ### Construct a Graph! ###
-        G = nx.Graph()
-        G.add_nodes_from(node_list)
-        G.add_edges_from(edge_list)
+        try:
+            if mechanism == 'With Only Proteins':
+                final_kg_final = MoA_final_protein_kg(dz_name, dz_id_list,med_id)
+            else:
+                final_kg_final = MoA_final_kg(dz_name, dz_id_list,med_id)
+            node_color_df = MoA_node_color_df()
+            node_list = MoA_make_node_list(final_kg_final,node_color_df)
+            edge_list = MoA_make_edge_list(final_kg_final)
+            ### Construct a Graph! ###
+            G = nx.Graph()
+            G.add_nodes_from(node_list)
+            G.add_edges_from(edge_list)
+        except:
+            pass
         
         try:
             T, shortest_paths_dict, num = MoA_construct_graph(G,med_id,dz_id_list,dz_name,med_name)
