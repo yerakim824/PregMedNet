@@ -38,6 +38,7 @@ pip install -r requirements.txt
 ```
 
 ## Code Structure
+```
 PregMedNet/
 │
 ├── .devcontainer/                      # Development container configuration for reproducible environments
@@ -54,7 +55,7 @@ PregMedNet/
 │   └── MOA_with_biological_nodes.ipynb    # MoA inference integrating protein and biological nodes
 │
 ├── Interactive_Webapp/                 # Source code for the interactive PregMedNet platform
-│   ├── 2024_reference_tables/          # Reference data for node mapping (diseases, drugs, etc. kg.parquet file is also used files in 2_mechanism-of-actions folder)
+│   ├── 2024_reference_tables/          # Reference data for node mapping (diseases, drugs, etc. kg.parquet file also used in 2_mechanism-of-actions folder)
 │   ├── Dockerfile                      # Docker build for deployment
 │   ├── cloudbuild.yaml                 # Google Cloud Build configuration for automated deployment
 │   ├── PregMedNet_Functions.py         # Shared backend utility functions
@@ -69,6 +70,7 @@ PregMedNet/
 ├── LICENSE                             # License information
 ├── README.md                           # Project documentation
 └── requirements.txt                    # Python package dependencies for 1_medication_impact_calculation and 2_mechanism-of-actions folders
+```
 
 
 ## License
