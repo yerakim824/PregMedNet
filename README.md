@@ -37,6 +37,9 @@ The code is written in Python3. Please install the packages present in the requi
 pip install -r requirements.txt
 ```
 
+## Code Structure
+
+
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
