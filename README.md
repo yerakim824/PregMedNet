@@ -38,6 +38,37 @@ pip install -r requirements.txt
 ```
 
 ## Code Structure
+PregMedNet/
+│
+├── .devcontainer/                      # Development container configuration for reproducible environments
+│
+├── 1_medication_impact_calculation/    # Scripts for estimating medication–outcome associations
+│   ├── benjamini_hochberg_correction.py      # Multiple testing correction (FDR control)
+│   ├── drug_drug_interactions.py             # Analysis of concomitant drug–drug effects
+│   ├── single_medication_impact_raw_odds.py  # Computes unadjusted (raw) odds ratios
+│   └── single_medication_impact_adjusted_odds.py # Computes confounder-adjusted odds ratios
+│
+├── 2_mechanism-of-actions/             # Graph-based mechanism-of-action (MoA) inference
+│   ├── MOA_functions.py                # Core functions for network integration and MoA computation
+│   ├── MOA_only_with_protein_nodes.ipynb  # MoA inference using protein-level networks
+│   └── MOA_with_biological_nodes.ipynb    # MoA inference integrating protein and biological nodes
+│
+├── Interactive_Webapp/                 # Source code for the interactive PregMedNet platform
+│   ├── 2024_reference_tables/          # Reference data for node mapping (diseases, drugs, etc. kg.parquet file is also used files in 2_mechanism-of-actions folder)
+│   ├── Dockerfile                      # Docker build for deployment
+│   ├── cloudbuild.yaml                 # Google Cloud Build configuration for automated deployment
+│   ├── PregMedNet_Functions.py         # Shared backend utility functions
+│   ├── PregMedNet_Interactive_Website.py # Streamlit-based web interface (deployed at pregmednet.stanford.edu)
+│   ├── requirements.txt                # Dependencies specific to the web app
+│   └── README.md                       # Documentation for the web interface
+│
+├── figures/                            # Project figures for README and manuscript
+│   └── pregmednet_overview.png
+│
+├── .gitattributes                      # Git LFS configuration for large files
+├── LICENSE                             # License information
+├── README.md                           # Project documentation
+└── requirements.txt                    # Python package dependencies for 1_medication_impact_calculation and 2_mechanism-of-actions folders
 
 
 ## License
