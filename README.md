@@ -5,12 +5,13 @@ MedRxiv doi: https://doi.org/10.1101/2025.02.13.25322242
 
 ## Overview
 <p align="center">
-  <img src="figures/pregmednet_overview_figure.png" width="80%">
+  <img src="figures/pregmednet_overview.png" width="80%">
 </p>
-**PregMedNet** is a platform that provides multifaceted insights into the impacts of maternal medications during pregnancy on neonatal complications.
+
+**PregMedNet is a platform that provides multifaceted insights into the impacts of maternal medications during pregnancy on neonatal complications.**
 We systematically analyzed large-scale medical claims data with machine-learning methods to estimate multifaceted perinatal medication impacts.
 
-It includes:
+It includes:s
 1. Estimation of maternal medication effects on neonatal outcomes, including both raw and counfounder-adjusted
 2. Analysis of drug–drug interactions during pregnancy
 3. Mechanism-of-action (MoA) inference through biological network integration
