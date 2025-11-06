@@ -43,11 +43,12 @@ PregMedNet/
 │
 ├── .devcontainer/                      # Development container configuration for reproducible environments
 │
+├── 0_data/    # Contains synthetic data to test the code add script for generating it
+│
 ├── 1_medication_impact_calculation/    # Scripts for estimating medication–outcome associations
-│   ├── benjamini_hochberg_correction.py      # Multiple testing correction (FDR control)
-│   ├── drug_drug_interactions.py             # Analysis of concomitant drug–drug effects
-│   ├── single_medication_impact_raw_odds.py  # Computes unadjusted (raw) odds ratios
-│   └── single_medication_impact_adjusted_odds.py # Computes confounder-adjusted odds ratios
+│   ├── 1_new_single_meds_raw.ipynb           # Analysis of unadjusted odds ratios
+│   ├── 2_new_single_meds_adjusted.ipynb      # Analysis of adjusted odds ratios
+│   └── 3_drug_drug_interactions.ipynb        # Analysis of drug-drug interactions
 │
 ├── 2_mechanism-of-actions/             # Graph-based mechanism-of-action (MoA) inference
 │   ├── MOA_functions.py                # Core functions for network integration and MoA computation
@@ -63,7 +64,7 @@ PregMedNet/
 │   ├── requirements.txt                # Dependencies specific to the web app
 │   └── README.md                       # Documentation for the web interface
 │
-├── figures/                            # Project figures for README and manuscript
+├── figures/                            # Project figures for README
 │   └── pregmednet_overview.png
 │
 ├── .gitattributes                      # Git LFS configuration for large files
