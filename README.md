@@ -70,12 +70,14 @@ pip install -r requirements.txt
   git clone https://github.com/yerakim824/PregMedNet.git
   cd PregMedNet
   pip install -r requirements.txt
-  jupyter notebook 0_data/make_synthetic_dataset.ipynb
-  jupyter notebook 1_medication_impact_calculation/1_new_single_meds_raw.ipynb (Takes ~ 30 seconds)
+  
+  jupyter notebook 1_medication_impact_calculation/1_new_single_meds_raw.ipynb 
   jupyter notebook 1_medication_impact_calculation/2_new_single_meds_adjusted.ipynb
   jupyter notebook 1_medication_impact_calculation/3_drug_drug_interactions.ipynb
 ```
-Expected outcomes can be found 0_data/results
+Each analysis takes about 30 seconds to 1 minute using the synthetic dataset,
+and the expected results can be found in 0_data/results.
+*You can use your own dataset by modifying the input file paths and variable names in the notebooks as needed.*
 
 
 ## Code Structure
