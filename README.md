@@ -33,7 +33,7 @@ In this study, the database was accessed through the Stanford Center for Populat
 
 Detailed information about data processing and cohort construction can be found in the Methods section of our paper.
 
-
+*In this GitHub repository, we provide a synthetic dataset that mimics the structure of the original data used in the study.*
 
 
 ## System Requirements
