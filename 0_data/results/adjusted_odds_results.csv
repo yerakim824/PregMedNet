@@ -1,0 +1,2 @@
+Disease,Medication,odds ratio,p-val,95% CI (LL),95% CI (UL),best_shrink_coeff,k,m,a,B-H critical value,BH-significance
+RDS_Baby,"Ondansetron, Oral",5.550456024985583,0.0,5.217693861935584,5.9044403333142705,0.028599265726103173,1,1,0.05,0.05,True
