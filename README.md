@@ -3,6 +3,7 @@ An implementation of **PregMedNet** from our publication: **Kim et al.** *"PregM
 
 MedRxiv doi: https://doi.org/10.1101/2025.02.13.25322242
 
+
 ## Overview
 <p align="center">
   <img src="figures/pregmednet_overview.png" width="80%">
@@ -18,6 +19,7 @@ It includes:s
 
 🔗 Comprehensive results are available on our interactive website: http://pregmednet.stanford.edu 
 
+
 ## Data Availability
 This project utilizes the Merative™ MarketScan® Commercial Database, a real-world healthcare dataset that contains de-identified medical records from over 188 million patients across the United States.
 
@@ -31,19 +33,60 @@ In this study, the database was accessed through the Stanford Center for Populat
 
 Detailed information about data processing and cohort construction can be found in the Methods section of our paper.
 
-## Requirements
-The code is written in Python3. Please install the packages present in the requiremtns.txt file. You may use:
+
+
+
+## System Requirements
+
+All software dependencies and operating systems (including version numbers):
+The code is implemented in Python 3.12 and has been tested on Ubuntu 22.04 LTS and macOS Sonoma.
+All required dependencies are listed in the requirements.txt file and can be installed with:
 ```
 pip install -r requirements.txt
 ```
+Versions the software has been tested on:
+Verified on Python 3.12 (compatible with Python 3.10 and above).
+
+Any required non-standard hardware:
+None. The analyses and web application run on standard CPU-based systems; no GPU or specialized hardware is required.
+
+
+## Installation Guide
+- Instructions: Clone the repository and install the required dependencies:
+```
+git clone https://github.com/yerakim824/PregMedNet.git
+cd PregMedNet
+pip install -r requirements.txt
+```
+- Typical install time on a “normal” desktop computer: Approximately 1 minute (depending on internet speed and system performance).
+
+
+## Demo
+- **Instructions to run on data:**  
+  To reproduce the demo, clone the repository and run the synthetic example provided in `0_data/make_synthetic_dataset.ipynb`,  
+  followed by the medication impact notebooks in `1_medication_impact_calculation`.  
+```
+  bash
+  git clone https://github.com/yerakim824/PregMedNet.git
+  cd PregMedNet
+  pip install -r requirements.txt
+  jupyter notebook 0_data/make_synthetic_dataset.ipynb
+  jupyter notebook 1_medication_impact_calculation/1_new_single_meds_raw.ipynb (Takes ~ 30 seconds)
+  jupyter notebook 1_medication_impact_calculation/2_new_single_meds_adjusted.ipynb
+  jupyter notebook 1_medication_impact_calculation/3_drug_drug_interactions.ipynb
+```
+Expected outcomes can be found 0_data/results
+
 
 ## Code Structure
-```
 PregMedNet/
 │
 ├── .devcontainer/                      # Development container configuration for reproducible environments
 │
-├── 0_data/    # Contains synthetic data to test the code add script for generating it
+├── 0_data/
+│   ├── results                         # a folder containing expected results
+│   ├── make_synthetic_dataset.ipynb    # Script to generate a synthetic dataset
+│   └── synthetic_baby_mom_data.csv     # Synthetic dataset used in 1_medication_impact_calculation folder
 │
 ├── 1_medication_impact_calculation/    # Scripts for estimating medication–outcome associations
 │   ├── 1_new_single_meds_raw.ipynb           # Analysis of unadjusted odds ratios
@@ -55,7 +98,7 @@ PregMedNet/
 │   ├── MOA_only_with_protein_nodes.ipynb  # MoA inference using protein-level networks
 │   └── MOA_with_biological_nodes.ipynb    # MoA inference integrating protein and biological nodes
 │
-├── Interactive_Webapp/                 # Source code for the interactive PregMedNet platform
+├── Interactive_Webapp/                 # Source code for the interactive PregMedNet platform and MOA test in folder 2_mechanism-of-actions
 │   ├── 2024_reference_tables/          # Reference data for node mapping (diseases, drugs, etc. kg.parquet file also used in 2_mechanism-of-actions folder)
 │   ├── Dockerfile                      # Docker build for deployment
 │   ├── cloudbuild.yaml                 # Google Cloud Build configuration for automated deployment
